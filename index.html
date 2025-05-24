@@ -14,25 +14,58 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 15%, #f093fb 30%, #f5576c 45%, #4facfe 60%, #00f2fe 75%, #43e97b 90%, #38f9d7 100%);
             min-height: 100vh;
             padding: 20px;
             padding-bottom: 80px;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
             text-align: center;
             margin-bottom: 60px;
             background: rgba(255, 255, 255, 0.98);
-            padding: 50px 30px;
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(20px);
             position: relative;
             overflow: hidden;
@@ -44,103 +77,158 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6, #27ae60);
+            height: 8px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6, #27ae60, #8e44ad, #f39c12);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         .header h1 {
-            font-size: 3.5em;
+            font-size: 4em;
             color: #2c3e50;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .header .flag {
-            font-size: 2.2em;
-            margin: 0 15px;
+            font-size: 2.5em;
+            margin: 0 20px;
             animation: wave 2s ease-in-out infinite;
+            display: inline-block;
         }
 
         @keyframes wave {
 
             0%,
             100% {
-                transform: rotate(0deg);
+                transform: rotate(0deg) scale(1);
             }
 
             25% {
-                transform: rotate(-10deg);
+                transform: rotate(-15deg) scale(1.1);
             }
 
             75% {
-                transform: rotate(10deg);
+                transform: rotate(15deg) scale(1.1);
             }
         }
 
         .header p {
-            font-size: 1.4em;
+            font-size: 1.6em;
             color: #34495e;
-            margin-bottom: 25px;
-            font-weight: 500;
+            margin-bottom: 30px;
+            font-weight: 600;
         }
 
         .subtitle {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #7f8c8d;
             font-style: italic;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            line-height: 1.6;
         }
 
         .quick-stats {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 50px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .quick-stat {
             text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .quick-stat:hover {
+            transform: translateY(-5px) scale(1.05);
         }
 
         .quick-stat-number {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: bold;
             color: #3498db;
             display: block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .quick-stat-label {
-            font-size: 0.9em;
-            color: #7f8c8d;
+            font-size: 1em;
+            color: #2c3e50;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-top: 10px;
         }
 
         .stats-section {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 50px;
-            margin-bottom: 40px;
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 50px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(52, 152, 219, 0.05), transparent);
+            animation: rotate 20s linear infinite;
+        }
+
+        .stats-section h3 {
+            text-align: center;
+            font-size: 2.8em;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .stat-item {
-            padding: 30px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 20px;
-            transition: transform 0.3s ease;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 25px;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            border: 2px solid transparent;
         }
 
         .stat-item::before {
@@ -149,47 +237,50 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6, #27ae60);
+            height: 6px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6, #27ae60, #8e44ad);
         }
 
         .stat-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #3498db;
         }
 
         .stat-number {
-            font-size: 3.5em;
+            font-size: 4em;
             font-weight: bold;
             color: #2c3e50;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .stat-label {
             color: #7f8c8d;
-            font-size: 1.2em;
-            font-weight: 500;
+            font-size: 1.3em;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .exam-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 35px;
-            margin-bottom: 60px;
+            gap: 40px;
+            margin-bottom: 70px;
         }
 
         .exam-card {
             background: white;
-            border-radius: 25px;
-            padding: 40px;
+            border-radius: 30px;
+            padding: 45px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-            transition: all 0.4s ease;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+            transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
         }
 
         .exam-card::before {
@@ -198,8 +289,13 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
+            height: 8px;
             background: var(--accent-color);
+            transition: height 0.3s ease;
+        }
+
+        .exam-card:hover::before {
+            height: 15px;
         }
 
         .exam-card::after {
@@ -211,12 +307,12 @@
             height: 200%;
             background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             pointer-events: none;
         }
 
         .exam-card:hover::after {
-            opacity: 0.05;
+            opacity: 0.08;
         }
 
         .exam-card.math {
@@ -235,51 +331,61 @@
             --accent-color: #27ae60;
         }
 
+        .exam-card.aptitude {
+            --accent-color: #8e44ad;
+        }
+
         .exam-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px) scale(1.03);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
             border-color: var(--accent-color);
         }
 
         .exam-icon {
-            font-size: 5em;
-            margin-bottom: 25px;
+            font-size: 6em;
+            margin-bottom: 30px;
             color: var(--accent-color);
             position: relative;
             z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .exam-card:hover .exam-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .exam-card h2 {
-            font-size: 2.2em;
+            font-size: 2.4em;
             color: #2c3e50;
-            margin-bottom: 20px;
-            font-weight: 600;
+            margin-bottom: 25px;
+            font-weight: 700;
             position: relative;
             z-index: 2;
         }
 
         .exam-card p {
             color: #7f8c8d;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            font-size: 1.15em;
             position: relative;
             z-index: 2;
         }
 
         .exam-features {
             list-style: none;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             position: relative;
             z-index: 2;
         }
 
         .exam-features li {
             color: #34495e;
-            margin: 12px 0;
-            padding-left: 25px;
+            margin: 15px 0;
+            padding-left: 30px;
             position: relative;
-            font-size: 1.05em;
+            font-size: 1.1em;
+            font-weight: 500;
         }
 
         .exam-features li::before {
@@ -288,25 +394,27 @@
             left: 0;
             color: var(--accent-color);
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
 
         .exam-btn {
             background: linear-gradient(135deg, var(--accent-color), var(--accent-color));
             color: white;
-            padding: 18px 35px;
+            padding: 20px 40px;
             border: none;
             border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: 600;
+            font-size: 1.3em;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-decoration: none;
             display: inline-block;
             width: 100%;
             position: relative;
             z-index: 2;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .exam-btn::before {
@@ -316,8 +424,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
         }
 
         .exam-btn:hover::before {
@@ -326,154 +434,171 @@
 
         .exam-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            filter: brightness(110%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            filter: brightness(110%) saturate(120%);
         }
 
-        .info-section {
+        .features-showcase {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 50px;
-            margin-bottom: 40px;
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 50px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
         }
 
-        .info-section h3 {
+        .features-showcase h3 {
             color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 30px;
+            font-size: 2.8em;
+            margin-bottom: 40px;
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        .info-grid {
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            border-color: #3498db;
+            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3.5em;
+            margin-bottom: 25px;
+            color: #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-item h4 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .feature-item p {
+            color: #7f8c8d;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+
+        .testimonials-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonials-section h3 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 35px;
         }
 
-        .info-card {
+        .testimonial {
             background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            padding: 35px;
-            border-radius: 20px;
-            border-left: 6px solid #3498db;
-            transition: all 0.3s ease;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
             position: relative;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
             overflow: hidden;
         }
 
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(52, 152, 219, 0.1), transparent);
-            border-radius: 50%;
-            transform: translate(30px, -30px);
-        }
-
-        .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .info-card h4 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-
-        .info-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .info-card li {
-            color: #34495e;
-            margin: 12px 0;
-            padding-left: 25px;
-            position: relative;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-
-        .info-card li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
+        .testimonial::before {
+            content: '"';
+            font-size: 5em;
             color: #3498db;
-            font-weight: bold;
-            font-size: 1.5em;
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            opacity: 0.2;
+            font-family: serif;
         }
 
-        .features-showcase {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 50px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .features-showcase h3 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px);
+        .testimonial:hover {
             border-color: #3498db;
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .feature-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #3498db;
+        .testimonial-text {
+            font-style: italic;
+            color: #34495e;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
         }
 
-        .feature-item h4 {
+        .testimonial-author {
+            font-weight: 700;
             color: #2c3e50;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 5px;
         }
 
-        .feature-item p {
+        .testimonial-role {
             color: #7f8c8d;
-            line-height: 1.6;
-            font-size: 1.05em;
+            font-size: 1em;
+            font-weight: 500;
         }
 
         .cta-section {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            border-radius: 25px;
-            padding: 60px 40px;
+            background: linear-gradient(135deg, #3498db, #2980b9, #8e44ad);
+            border-radius: 30px;
+            padding: 70px 50px;
             text-align: center;
             color: white;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             position: relative;
             overflow: hidden;
         }
@@ -486,7 +611,7 @@
             width: 200%;
             height: 200%;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            animation: rotate 25s linear infinite;
         }
 
         @keyframes rotate {
@@ -500,24 +625,26 @@
         }
 
         .cta-section h3 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: 3em;
+            margin-bottom: 25px;
             position: relative;
             z-index: 2;
+            font-weight: 800;
         }
 
         .cta-section p {
-            font-size: 1.3em;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            opacity: 0.95;
             position: relative;
             z-index: 2;
+            line-height: 1.6;
         }
 
         .cta-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             position: relative;
             z-index: 2;
@@ -526,20 +653,22 @@
         .cta-btn {
             background: white;
             color: #3498db;
-            padding: 15px 30px;
+            padding: 18px 35px;
             border: none;
             border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: 600;
+            font-size: 1.2em;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-decoration: none;
             display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             background: #f8f9fa;
         }
 
@@ -551,74 +680,85 @@
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             font-size: 1em;
             z-index: 1000;
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
         }
 
         .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 25px;
         }
 
         .footer-logo {
-            font-size: 1.2em;
-            font-weight: 600;
+            font-size: 1.3em;
+            font-weight: 700;
         }
 
         .developer-info {
-            background: rgba(52, 73, 94, 0.3);
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 0.9em;
+            background: rgba(52, 73, 94, 0.4);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1em;
+            font-weight: 600;
         }
 
         .social-links {
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
 
         .social-link {
             color: white;
-            font-size: 1.2em;
+            font-size: 1.4em;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .social-link:hover {
             color: #3498db;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.2);
+        }
+
+        /* Progress indicator */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6);
+            z-index: 9999;
+            transition: width 0.3s ease;
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2.5em;
+                font-size: 2.8em;
             }
 
             .exam-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 30px;
             }
 
             .exam-card {
-                padding: 30px;
+                padding: 35px;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .features-grid {
+            .features-grid,
+            .testimonials-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -633,7 +773,15 @@
             }
 
             body {
-                padding-bottom: 120px;
+                padding-bottom: 140px;
+            }
+
+            .quick-stats {
+                gap: 25px;
+            }
+
+            .quick-stat-number {
+                font-size: 2.5em;
             }
         }
 
@@ -647,7 +795,7 @@
             }
 
             50% {
-                transform: scale(1.05);
+                transform: scale(1.08);
             }
 
             100% {
@@ -656,13 +804,13 @@
         }
 
         .fade-in {
-            animation: fadeIn 1s ease-in;
+            animation: fadeIn 1.2s ease-in;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
 
             to {
@@ -672,7 +820,7 @@
         }
 
         .floating {
-            animation: floating 3s ease-in-out infinite;
+            animation: floating 4s ease-in-out infinite;
         }
 
         @keyframes floating {
@@ -683,13 +831,62 @@
             }
 
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-15px);
+            }
+        }
+
+        .glow {
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Progress indicator -->
+    <div class="progress-indicator" id="progressIndicator"></div>
+
+    <!-- Background particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+
     <div class="container">
         <div class="header fade-in">
             <h1>
@@ -698,42 +895,49 @@
                 <span class="flag">🇪🇹</span>
             </h1>
             <p>Master Your Future with Comprehensive Practice Tests</p>
-            <div class="subtitle">Excellence in Education • Authentic Exam Experience • Proven Results</div>
+            <div class="subtitle">Excellence in Education • Authentic Exam Experience • Proven Results • Success
+                Guaranteed</div>
 
             <div class="quick-stats">
                 <div class="quick-stat">
-                    <span class="quick-stat-number">400</span>
+                    <span class="quick-stat-number" data-target="500">0</span>
                     <div class="quick-stat-label">Questions</div>
                 </div>
                 <div class="quick-stat">
-                    <span class="quick-stat-number">4</span>
+                    <span class="quick-stat-number" data-target="5">0</span>
                     <div class="quick-stat-label">Subjects</div>
                 </div>
                 <div class="quick-stat">
-                    <span class="quick-stat-number">100%</span>
-                    <div class="quick-stat-label">Success Rate</div>
+                    <span class="quick-stat-number" data-target="100">0</span>
+                    <div class="quick-stat-label">% Success</div>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-number" data-target="15">0</span>
+                    <div class="quick-stat-label">Hours Total</div>
                 </div>
             </div>
         </div>
 
         <div class="stats-section fade-in">
+            <h3>📊 Comprehensive Exam Statistics</h3>
             <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">400</span>
+                <div class="stat-item floating">
+                    <span class="stat-number" data-target="500">0</span>
                     <div class="stat-label">Total Questions</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">4</span>
+                <div class="stat-item floating" style="animation-delay: 0.5s;">
+                    <span class="stat-number" data-target="5">0</span>
                     <div class="stat-label">Core Subjects</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">3</span>
+                <div class="stat-item floating" style="animation-delay: 1s;">
+                    <span class="stat-number" data-target="3">0</span>
                     <div class="stat-label">Hours Per Exam</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <div class="stat-label">Curriculum Aligned</div>
+                <div class="stat-item floating" style="animation-delay: 1.5s;">
+                    <span class="stat-number" data-target="100">0</span>
+                    <div class="stat-label">% Curriculum Aligned</div>
                 </div>
+
             </div>
         </div>
 
@@ -745,7 +949,7 @@
                     designed for Ethiopian Grade 11 curriculum.</p>
                 <ul class="exam-features">
                     <li>Relations and Functions</li>
-                    <li>Rational Expressions</li>
+                    <li>Rational Expressions & Functions</li>
                     <li>Matrices and Determinants</li>
                     <li>Vectors and Transformations</li>
                     <li>Statistics and Probability</li>
@@ -760,10 +964,10 @@
                     questions and practical applications.</p>
                 <ul class="exam-features">
                     <li>Atomic Structure & Periodic Properties</li>
-                    <li>Chemical Bonding</li>
+                    <li>Chemical Bonding Theories</li>
                     <li>Physical States of Matter</li>
-                    <li>Chemical Kinetics</li>
-                    <li>Organic Compounds</li>
+                    <li>Chemical Kinetics & Equilibrium</li>
+                    <li>Oxygen-Containing Organic Compounds</li>
                 </ul>
                 <a href="chemistry-exam.html" class="exam-btn">Start Chemistry Exam</a>
             </div>
@@ -774,11 +978,11 @@
                 <p>Understand mechanics, thermodynamics, electricity, and nuclear physics with practical problem-solving
                     and real-world applications.</p>
                 <ul class="exam-features">
-                    <li>Vectors and Motion</li>
-                    <li>Dynamics and Forces</li>
-                    <li>Heat and Thermodynamics</li>
-                    <li>Electrostatics & Circuits</li>
-                    <li>Nuclear Physics</li>
+                    <li>Vectors and Motion Dynamics</li>
+                    <li>Forces and Newton's Laws</li>
+                    <li>Heat Conduction & Calorimetry</li>
+                    <li>Electrostatics & Electric Circuits</li>
+                    <li>Nuclear Physics Fundamentals</li>
                 </ul>
                 <a href="physics-exam.html" class="exam-btn">Start Physics Exam</a>
             </div>
@@ -789,119 +993,80 @@
                 <p>Discover life sciences through genetics, human body systems, enzymes, and environmental biology with
                     comprehensive coverage.</p>
                 <ul class="exam-features">
-                    <li>Biology and Technology</li>
-                    <li>Animal Characteristics</li>
-                    <li>Enzymes and Genetics</li>
-                    <li>Human Body Systems</li>
+                    <li>Biology and Technology Applications</li>
+                    <li>Animal Characteristics & Classification</li>
+                    <li>Enzymes and Genetic Principles</li>
+                    <li>Human Body Systems Integration</li>
                     <li>Population & Natural Resources</li>
                 </ul>
-                <a href="bio.html" class="exam-btn">Start Biology Exam</a>
+                <a href="biology-exam.html" class="exam-btn">Start Biology Exam</a>
+            </div>
+
+            <div class="exam-card aptitude fade-in floating">
+                <div class="exam-icon">🧠</div>
+                <h2>Aptitude</h2>
+                <p>Develop logical reasoning, numerical ability, and analytical thinking skills essential for academic
+                    and professional success.</p>
+                <ul class="exam-features">
+                    <li>Logical Reasoning & Patterns</li>
+                    <li>Numerical Ability & Calculations</li>
+                    <li>Analytical & Critical Thinking</li>
+                    <li>Spatial & Verbal Reasoning</li>
+                    <li>Problem Solving Techniques</li>
+                </ul>
+                <a href="apt.html" class="exam-btn">Start Aptitude Exam</a>
             </div>
         </div>
 
-        <div class="features-showcase fade-in">
-            <h3>Why Choose Our Practice Exams?</h3>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">🎯</div>
-                    <h4>Authentic Experience</h4>
-                    <p>Real exam conditions with 3-hour time limits and Ethiopian curriculum alignment for genuine
-                        preparation.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">📊</div>
-                    <h4>Smart Analytics</h4>
-                    <p>Detailed performance tracking, instant scoring, and comprehensive review modes to identify
-                        strengths and weaknesses.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">📱</div>
-                    <h4>Mobile Friendly</h4>
-                    <p>Responsive design that works perfectly on all devices - study anywhere, anytime with seamless
-                        experience.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🔄</div>
-                    <h4>Randomized Questions</h4>
-                    <p>Questions are shuffled for each attempt, ensuring fresh practice sessions and preventing
-                        memorization.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">⚡</div>
-                    <h4>Instant Results</h4>
-                    <p>Get immediate feedback with detailed explanations and grade calculations based on Ethiopian
-                        standards.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🎓</div>
-                    <h4>Expert Designed</h4>
-                    <p>Questions crafted by education professionals following official Ethiopian Grade 11 curriculum
-                        guidelines.</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="info-section fade-in">
-            <h3>How to Excel in Your Exams</h3>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h4>1️⃣ Strategic Preparation</h4>
-                    <ul>
-                        <li>Choose your weakest subject first</li>
-                        <li>Set aside dedicated 3-hour study blocks</li>
-                        <li>Create a consistent study schedule</li>
-                        <li>Use the flagging system for difficult questions</li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h4>2️⃣ Effective Practice</h4>
-                    <ul>
-                        <li>Take full-length practice exams regularly</li>
-                        <li>Review incorrect answers thoroughly</li>
-                        <li>Time yourself to build exam stamina</li>
-                        <li>Focus on understanding, not memorization</li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h4>3️⃣ Performance Analysis</h4>
-                    <ul>
-                        <li>Track your progress across subjects</li>
-                        <li>Identify patterns in your mistakes</li>
-                        <li>Retake exams to measure improvement</li>
-                        <li>Use review mode to reinforce learning</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="cta-section fade-in">
-            <h3>Ready to Excel in Your Grade 11 Exams?</h3>
-            <p>Join thousands of Ethiopian students who have improved their grades with our comprehensive practice
-                exams.</p>
-            <div class="cta-buttons">
-                <a href="index.html" class="cta-btn">Start with Mathematics</a>
-                <a href="chemistry-exam.html" class="cta-btn">Begin Chemistry</a>
-                <a href="physics-exam.html" class="cta-btn">Try Physics</a>
-                <a href="biology-exam.html" class="cta-btn">Explore Biology</a>
-            </div>
-        </div>
     </div>
 
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">🎓 Ethiopian Grade 11 Practice Exam Portal</div>
-            <div class="developer-info">Prepared by Biruk</div>
-            <div class="social-links">
-                <a href="#" class="social-link">📧</a>
-                <a href="#" class="social-link">📱</a>
-                <a href="#" class="social-link">🌐</a>
-            </div>
-        </div>
-    </div>
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Enhanced fade-in animation with stagger effect
+            // Hide loading overlay
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 1500);
+
+            // Create background particles
+            function createParticles() {
+                const particlesContainer = document.getElementById('bgParticles');
+                const particleCount = 50;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+
+                    const size = Math.random() * 4 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 6 + 's';
+                    particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            createParticles();
+
+            // Progress indicator
+            function updateProgressIndicator() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('progressIndicator').style.width = scrollPercent + '%';
+            }
+
+            window.addEventListener('scroll', updateProgressIndicator);
+
+            // Enhanced fade-in animation with intersection observer
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -913,7 +1078,7 @@
                         setTimeout(() => {
                             entry.target.style.opacity = '1';
                             entry.target.style.transform = 'translateY(0)';
-                        }, index * 100);
+                        }, index * 150);
                     }
                 });
             }, observerOptions);
@@ -921,8 +1086,8 @@
             // Observe all fade-in elements
             document.querySelectorAll('.fade-in').forEach(el => {
                 el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                el.style.transform = 'translateY(40px)';
+                el.style.transition = 'opacity 1s ease, transform 1s ease';
                 observer.observe(el);
             });
 
@@ -930,10 +1095,12 @@
             document.querySelectorAll('.exam-card').forEach(card => {
                 card.addEventListener('mouseenter', function () {
                     this.querySelector('.exam-icon').classList.add('pulse');
+                    this.classList.add('glow');
                 });
 
                 card.addEventListener('mouseleave', function () {
                     this.querySelector('.exam-icon').classList.remove('pulse');
+                    this.classList.remove('glow');
                 });
             });
 
@@ -946,20 +1113,25 @@
                     // Enhanced loading state
                     const originalText = this.textContent;
                     this.style.opacity = '0.7';
-                    this.textContent = 'Loading...';
+                    this.innerHTML = '⏳ Loading...';
                     this.style.pointerEvents = 'none';
 
-                    // Reset after a short delay (in case navigation fails)
+                    // Add loading animation
+                    setTimeout(() => {
+                        this.innerHTML = '🚀 Launching...';
+                    }, 800);
+
+                    // Reset after navigation (fallback)
                     setTimeout(() => {
                         this.style.opacity = '1';
                         this.textContent = originalText;
                         this.style.pointerEvents = 'auto';
-                    }, 3000);
+                    }, 4000);
                 });
             });
 
             // Enhanced counter animation with easing
-            function animateCounter(element, target, duration = 2500) {
+            function animateCounter(element, target, duration = 3000) {
                 let start = 0;
                 const startTime = performance.now();
 
@@ -971,11 +1143,7 @@
                     const easeOutQuart = 1 - Math.pow(1 - progress, 4);
                     const current = Math.floor(start + (target - start) * easeOutQuart);
 
-                    if (typeof target === 'string' && target.includes('%')) {
-                        element.textContent = current + '%';
-                    } else {
-                        element.textContent = current;
-                    }
+                    element.textContent = current;
 
                     if (progress < 1) {
                         requestAnimationFrame(updateCounter);
@@ -986,35 +1154,34 @@
                 requestAnimationFrame(updateCounter);
             }
 
-            // Animate stat numbers when they come into view
+            // Animate all counters when they come into view
             const statsObserver = new IntersectionObserver(function (entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const number = entry.target;
-                        const target = number.textContent;
-                        const numericTarget = parseInt(target);
-
-                        if (!isNaN(numericTarget)) {
+                        const target = parseInt(number.getAttribute('data-target'));
+                        if (!isNaN(target)) {
                             number.textContent = '0';
                             setTimeout(() => {
                                 animateCounter(number, target);
-                            }, 500);
+                            }, 300);
                         }
                         statsObserver.unobserve(entry.target);
                     }
                 });
             });
 
-            document.querySelectorAll('.stat-number, .quick-stat-number').forEach(stat => {
+            // Observe all stat numbers
+            document.querySelectorAll('[data-target]').forEach(stat => {
                 statsObserver.observe(stat);
             });
 
             // Add floating animation delay for cards
             document.querySelectorAll('.floating').forEach((el, index) => {
-                el.style.animationDelay = `${index * 0.5}s`;
+                el.style.animationDelay = `${index * 0.6}s`;
             });
 
-            // Smooth scroll for anchor links
+            // Smooth scrolling for internal links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -1029,10 +1196,45 @@
             });
 
             // Add parallax effect to background
-            window.addEventListener('scroll', () => {
+            window.addEventListener('scroll', function () {
                 const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
-                document.body.style.backgroundPosition = `center ${rate}px`;
+                const parallax = document.body;
+                const speed = scrolled * 0.3;
+                parallax.style.backgroundPosition = `center ${speed}px`;
+            });
+
+            // Enhanced typing effect for subtitle
+            const subtitle = document.querySelector('.subtitle');
+            const originalText = subtitle.textContent;
+            subtitle.textContent = '';
+
+            setTimeout(() => {
+                let i = 0;
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        subtitle.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 30);
+                    }
+                }
+                typeWriter();
+            }, 2000);
+
+            // Add click effects to social links
+            document.querySelectorAll('.social-link').forEach(link => {
+                link.addEventListener('click', function () {
+                    this.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' && e.target.classList.contains('exam-btn')) {
+                    e.target.click();
+                }
             });
         });
     </script>
