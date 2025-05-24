@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopian Grade 11 Aptitude Practice Exam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 60px;
+            /* Space for footer */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .exam-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .exam-content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .question-nav {
+            width: 250px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-right: 2px solid #e9ecef;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.unanswered {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+
+        .nav-btn.answered {
+            background: #28a745;
+            color: white;
+        }
+
+        .nav-btn.current {
+            background: #8e44ad;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .nav-btn.flagged {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .question-area {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .question-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .flag-btn {
+            background: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        .aptitude-diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            border-left: 4px solid #8e44ad;
+            font-family: 'Courier New', monospace;
+        }
+
+        .sequence-box {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            background: white;
+            border: 2px solid #8e44ad;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .option.correct-answer {
+            background: #d4edda !important;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .option.wrong-answer {
+            background: #f8d7da !important;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .option.correct-answer:hover {
+            background: #d4edda !important;
+            transform: none;
+        }
+
+        .option.wrong-answer:hover {
+            background: #f8d7da !important;
+            transform: none;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .results {
+            display: none;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 3em;
+            font-weight: bold;
+            color: #28a745;
+            margin: 20px 0;
+        }
+
+        .grade {
+            font-size: 2em;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .start-screen {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .start-btn {
+            background: #8e44ad;
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin: 8px 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .exam-content {
+                flex-direction: column;
+            }
+
+            .question-nav {
+                width: 100%;
+                order: 2;
+            }
+
+            .nav-grid {
+                grid-template-columns: repeat(10, 1fr);
+            }
+
+            body {
+                padding-bottom: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Ethiopian Grade 11 Aptitude</h1>
+            <p>Practice Examination</p>
+        </div>
+
+        <div id="startScreen" class="start-screen">
+            <h2>Welcome to the Grade 11 Aptitude Practice Exam</h2>
+
+            <div class="instructions">
+                <h3>Instructions:</h3>
+                <ul>
+                    <li>This exam contains 100 multiple-choice questions</li>
+                    <li>Time limit: 3 hours (180 minutes)</li>
+                    <li>Each question has 4 options (A, B, C, D)</li>
+                    <li>Questions cover logical reasoning, numerical ability, and analytical thinking</li>
+                    <li>You can navigate between questions using the question grid</li>
+                    <li>Flag questions for review if needed</li>
+                    <li>Your answers are automatically saved</li>
+                    <li>Click "Submit Exam" when you're finished</li>
+                </ul>
+            </div>
+            <button class="start-btn" onclick="startExam()">Start Exam</button>
+        </div>
+
+        <div id="examInterface" style="display: none;">
+            <div class="exam-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>Time Remaining</h3>
+                        <div id="timer" class="timer">03:00:00</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Questions Answered</h3>
+                        <div id="answered">0 / 100</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Current Question</h3>
+                        <div id="currentQ">1</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Flagged Questions</h3>
+                        <div id="flagged">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exam-content">
+                <div class="question-nav">
+                    <h3>Question Navigation</h3>
+                    <div id="navGrid" class="nav-grid"></div>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn unanswered" style="width: 20px; height: 20px; margin-right: 10px;">
+                            </div>
+                            <span>Unanswered</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn answered" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Answered</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn flagged" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Flagged</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-area">
+                    <div class="question-header">
+                        <div class="question-number" id="questionNumber">Question 1</div>
+                        <button class="flag-btn" id="flagBtn" onclick="toggleFlag()">🚩 Flag</button>
+                    </div>
+
+                    <div class="question-text" id="questionText"></div>
+
+                    <div class="options" id="options"></div>
+
+                    <div class="controls">
+                        <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+                        <button class="btn btn-success" onclick="submitExam()">Submit Exam</button>
+                        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="results" class="results">
+            <h2>Exam Results</h2>
+            <div class="score-display" id="scoreDisplay"></div>
+            <div class="grade" id="gradeDisplay"></div>
+            <button class="btn btn-primary" onclick="reviewAnswers()">Review Answers</button>
+            <button class="btn btn-secondary" onclick="restartExam()">Take Again</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Prepared by Biruk
+    </div>
+
+    <script>
+        // Exam data and state
+        let currentQuestion = 0;
+        let answers = {};
+        let flaggedQuestions = new Set();
+        let timeRemaining = 180 * 60; // 3 hours in seconds
+        let timerInterval;
+        let examStarted = false;
+        let shuffledQuestions = [];
+
+        // Original aptitude questions array
+        const originalQuestions = [
+            // Logical Reasoning
+            {
+                question: "If all roses are flowers and some flowers are red, which conclusion is definitely true?",
+                options: ["A) All roses are red", "B) Some roses are red", "C) All flowers are roses", "D) Some roses may be red"],
+                correct: 3
+            },
+            {
+                question: "Complete the series: 2, 6, 12, 20, 30, ?",
+                options: ["A) 40", "B) 42", "C) 44", "D) 46"],
+                correct: 1
+            },
+            {
+                question: "If BOOK is coded as CPPL, how is WORD coded?",
+                options: ["A) XPSE", "B) XQSE", "C) XPRE", "D) XQRE"],
+                correct: 0
+            },
+            {
+                question: "Find the odd one out: Dog, Cat, Lion, Table",
+                options: ["A) Dog", "B) Cat", "C) Lion", "D) Table"],
+                correct: 3
+            },
+            {
+                question: "If Monday is the 1st, what day is the 15th?",
+                options: ["A) Monday", "B) Tuesday", "C) Wednesday", "D) Thursday"],
+                correct: 0
+            },
+            {
+                question: "Complete the analogy: Hand : Glove :: Foot : ?",
+                options: ["A) Sock", "B) Shoe", "C) Leg", "D) Toe"],
+                correct: 1
+            },
+            {
+                question: "Which number comes next: 1, 4, 9, 16, 25, ?",
+                options: ["A) 30", "B) 35", "C) 36", "D) 49"],
+                correct: 2
+            },
+            {
+                question: "If all birds can fly and penguins are birds, but penguins cannot fly, what can we conclude?",
+                options: ["A) The first statement is false", "B) Penguins are not birds", "C) Both statements cannot be true", "D) Penguins are exceptions"],
+                correct: 2
+            },
+            {
+                question: "Complete the pattern: A1, C3, E5, G7, ?",
+                options: ["A) H8", "B) I9", "C) J10", "D) K11"],
+                correct: 1
+            },
+            {
+                question: "If FRIEND is written as GSJFOE, how is MOTHER written?",
+                options: ["A) NPUIFS", "B) NPUIFS", "C) OPUIFS", "D) NPVIFS"],
+                correct: 0
+            },
+
+            // Numerical Ability
+            {
+                question: "What is 25% of 80?",
+                options: ["A) 15", "B) 20", "C) 25", "D) 30"],
+                correct: 1
+            },
+            {
+                question: "If a train travels 60 km in 45 minutes, what is its speed in km/hr?",
+                options: ["A) 75", "B) 80", "C) 85", "D) 90"],
+                correct: 1
+            },
+            {
+                question: "The average of 5 numbers is 20. If one number is 25, what is the average of the remaining 4?",
+                options: ["A) 18.75", "B) 19.25", "C) 19.75", "D) 20.25"],
+                correct: 0
+            },
+            {
+                question: "What is the next number in the sequence: 3, 7, 15, 31, ?",
+                options: ["A) 47", "B) 55", "C) 63", "D) 71"],
+                correct: 2
+            },
+            {
+                question: "If 3x + 5 = 20, what is the value of x?",
+                options: ["A) 3", "B) 4", "C) 5", "D) 6"],
+                correct: 2
+            },
+            {
+                question: "A rectangle has length 12 cm and width 8 cm. What is its area?",
+                options: ["A) 20 sq cm", "B) 40 sq cm", "C) 96 sq cm", "D) 192 sq cm"],
+                correct: 2
+            },
+            {
+                question: "What is 15% of 200?",
+                options: ["A) 25", "B) 30", "C) 35", "D) 40"],
+                correct: 1
+            },
+            {
+                question: "If a car uses 8 liters of fuel for 100 km, how much fuel is needed for 250 km?",
+                options: ["A) 18 liters", "B) 20 liters", "C) 22 liters", "D) 24 liters"],
+                correct: 1
+            },
+            {
+                question: "What is the square root of 144?",
+                options: ["A) 11", "B) 12", "C) 13", "D) 14"],
+                correct: 1
+            },
+            {
+                question: "If 2/3 of a number is 24, what is the number?",
+                options: ["A) 32", "B) 36", "C) 40", "D) 42"],
+                correct: 1
+            },
+
+            // Analytical Thinking
+            {
+                question: "In a group of 30 students, 18 play football, 12 play basketball, and 8 play both. How many play neither?",
+                options: ["A) 6", "B) 8", "C) 10", "D) 12"],
+                correct: 1
+            },
+            {
+                question: "If it takes 5 machines 5 minutes to make 5 widgets, how long does it take 100 machines to make 100 widgets?",
+                options: ["A) 5 minutes", "B) 20 minutes", "C) 100 minutes", "D) 500 minutes"],
+                correct: 0
+            },
+            {
+                question: "A clock shows 3:15. What is the angle between the hour and minute hands?",
+                options: ["A) 0°", "B) 7.5°", "C) 15°", "D) 22.5°"],
+                correct: 1
+            },
+            {
+                question: "If you rearrange the letters of 'LISTEN', you can form which word?",
+                options: ["A) SILENT", "B) ENLIST", "C) TINSEL", "D) All of the above"],
+                correct: 3
+            },
+            {
+                question: "A man is 4 times as old as his son. In 20 years, he will be twice as old. How old is the son now?",
+                options: ["A) 10", "B) 15", "C) 20", "D) 25"],
+                correct: 0
+            },
+            {
+                question: "Which shape comes next in the pattern: Circle, Square, Triangle, Circle, Square, ?",
+                options: ["A) Circle", "B) Square", "C) Triangle", "D) Pentagon"],
+                correct: 2
+            },
+            {
+                question: "If you have 12 balls and one is heavier, what's the minimum number of weighings needed to find it?",
+                options: ["A) 2", "B) 3", "C) 4", "D) 5"],
+                correct: 1
+            },
+            {
+                question: "In a race, if you overtake the person in 2nd place, what position are you in?",
+                options: ["A) 1st", "B) 2nd", "C) 3rd", "D) Cannot determine"],
+                correct: 1
+            },
+            {
+                question: "How many triangles are in a pentagram (5-pointed star)?",
+                options: ["A) 5", "B) 10", "C) 15", "D) 20"],
+                correct: 1
+            },
+            {
+                question: "If today is Wednesday, what day will it be 100 days from now?",
+                options: ["A) Monday", "B) Tuesday", "C) Wednesday", "D) Friday"],
+                correct: 3
+            },
+
+            // Pattern Recognition
+            {
+                question: "Complete the sequence: 1, 1, 2, 3, 5, 8, ?",
+                options: ["A) 11", "B) 13", "C) 15", "D) 17"],
+                correct: 1
+            },
+            {
+                question: "What comes next: AB, DE, HI, MN, ?",
+                options: ["A) QR", "B) ST", "C) TU", "D) UV"],
+                correct: 1
+            },
+            {
+                question: "Find the pattern: 2, 8, 18, 32, ?",
+                options: ["A) 48", "B) 50", "C) 52", "D) 54"],
+                correct: 1
+            },
+            {
+                question: "Complete: Z, Y, X, W, V, ?",
+                options: ["A) T", "B) U", "C) S", "D) R"],
+                correct: 1
+            },
+            {
+                question: "What's next: 1, 4, 7, 10, 13, ?",
+                options: ["A) 15", "B) 16", "C) 17", "D) 18"],
+                correct: 1
+            },
+            {
+                question: "Pattern: 100, 81, 64, 49, 36, ?",
+                options: ["A) 20", "B) 25", "C) 30", "D) 35"],
+                correct: 1
+            },
+            {
+                question: "Complete: AZ, BY, CX, DW, ?",
+                options: ["A) EV", "B) EU", "C) FV", "D) FU"],
+                correct: 0
+            },
+            {
+                question: "Next in series: 5, 10, 20, 40, ?",
+                options: ["A) 60", "B) 70", "C) 80", "D) 90"],
+                correct: 2
+            },
+            {
+                question: "Pattern: 3, 6, 12, 24, ?",
+                options: ["A) 36", "B) 42", "C) 48", "D) 54"],
+                correct: 2
+            },
+            {
+                question: "Complete: Monday, Wednesday, Friday, ?",
+                options: ["A) Saturday", "B) Sunday", "C) Tuesday", "D) Thursday"],
+                correct: 1
+            },
+
+            // Spatial Reasoning
+            {
+                question: "How many cubes are needed to build a 3×3×3 cube?",
+                options: ["A) 9", "B) 18", "C) 27", "D) 36"],
+                correct: 2
+            },
+            {
+                question: "If you fold a paper in half 3 times and make one cut, how many holes will there be when unfolded?",
+                options: ["A) 4", "B) 6", "C) 8", "D) 9"],
+                correct: 3
+            },
+            {
+                question: "A cube has how many faces?",
+                options: ["A) 4", "B) 6", "C) 8", "D) 12"],
+                correct: 1
+            },
+            {
+                question: "How many edges does a triangular pyramid have?",
+                options: ["A) 4", "B) 5", "C) 6", "D) 8"],
+                correct: 2
+            },
+            {
+                question: "If you rotate a square 90° clockwise, what shape do you get?",
+                options: ["A) Rectangle", "B) Diamond", "C) Square", "D) Triangle"],
+                correct: 2
+            },
+            {
+                question: "How many diagonals does a hexagon have?",
+                options: ["A) 6", "B) 9", "C) 12", "D) 15"],
+                correct: 1
+            },
+            {
+                question: "A cylinder has how many flat surfaces?",
+                options: ["A) 0", "B) 1", "C) 2", "D) 3"],
+                correct: 2
+            },
+            {
+                question: "If you cut a cone parallel to its base, what shape is the cross-section?",
+                options: ["A) Triangle", "B) Circle", "C) Rectangle", "D) Oval"],
+                correct: 1
+            },
+            {
+                question: "How many vertices does a rectangular prism have?",
+                options: ["A) 6", "B) 8", "C) 10", "D) 12"],
+                correct: 1
+            },
+            {
+                question: "A regular pentagon has how many lines of symmetry?",
+                options: ["A) 3", "B) 4", "C) 5", "D) 6"],
+                correct: 2
+            },
+
+            // Verbal Reasoning
+            {
+                question: "Choose the word that is most similar to 'HAPPY':",
+                options: ["A) Sad", "B) Joyful", "C) Angry", "D) Tired"],
+                correct: 1
+            },
+            {
+                question: "Which word does not belong: Apple, Orange, Banana, Carrot",
+                options: ["A) Apple", "B) Orange", "C) Banana", "D) Carrot"],
+                correct: 3
+            },
+            {
+                question: "Complete the analogy: Hot : Cold :: Day : ?",
+                options: ["A) Sun", "B) Night", "C) Light", "D) Time"],
+                correct: 1
+            },
+            {
+                question: "What is the opposite of 'EXPAND'?",
+                options: ["A) Grow", "B) Contract", "C) Increase", "D) Enlarge"],
+                correct: 1
+            },
+            {
+                question: "Which word means the same as 'QUICK'?",
+                options: ["A) Slow", "B) Fast", "C) Heavy", "D) Light"],
+                correct: 1
+            },
+            {
+                question: "Choose the word that doesn't fit: Run, Walk, Jump, Think",
+                options: ["A) Run", "B) Walk", "C) Jump", "D) Think"],
+                correct: 3
+            },
+            {
+                question: "Complete: Book : Read :: Music : ?",
+                options: ["A) Hear", "B) Listen", "C) Sound", "D) Play"],
+                correct: 1
+            },
+            {
+                question: "What is the plural of 'CHILD'?",
+                options: ["A) Childs", "B) Children", "C) Childes", "D) Childrens"],
+                correct: 1
+            },
+            {
+                question: "Which word is spelled correctly?",
+                options: ["A) Recieve", "B) Receive", "C) Receve", "D) Receeve"],
+                correct: 1
+            },
+            {
+                question: "Choose the synonym for 'DIFFICULT':",
+                options: ["A) Easy", "B) Hard", "C) Simple", "D) Clear"],
+                correct: 1
+            },
+
+            // Data Interpretation
+            {
+                question: "If a pie chart shows 25% for Category A, what angle does it represent?",
+                options: ["A) 60°", "B) 75°", "C) 90°", "D) 120°"],
+                correct: 2
+            },
+            {
+                question: "In a bar graph, if the highest bar is 80 and represents 100%, what does a bar of height 60 represent?",
+                options: ["A) 60%", "B) 70%", "C) 75%", "D) 80%"],
+                correct: 2
+            },
+            {
+                question: "If the mean of 5 numbers is 10, what is their sum?",
+                options: ["A) 40", "B) 45", "C) 50", "D) 55"],
+                correct: 2
+            },
+            {
+                question: "In a frequency table, if 20 students scored 80-90 and total students are 100, what percentage scored 80-90?",
+                options: ["A) 15%", "B) 20%", "C) 25%", "D) 30%"],
+                correct: 1
+            },
+            {
+                question: "If a line graph shows a steady increase from 10 to 50 over 4 years, what's the average yearly increase?",
+                options: ["A) 8", "B) 10", "C) 12", "D) 15"],
+                correct: 1
+            },
+            {
+                question: "In a scatter plot, if points form a line going up from left to right, what type of correlation is this?",
+                options: ["A) Negative", "B) Positive", "C) No correlation", "D) Cannot determine"],
+                correct: 1
+            },
+            {
+                question: "If the median of 7 numbers is 15, how many numbers are below 15?",
+                options: ["A) 2", "B) 3", "C) 4", "D) 5"],
+                correct: 1
+            },
+            {
+                question: "In a histogram, what does the height of each bar represent?",
+                options: ["A) Range", "B) Frequency", "C) Mean", "D) Mode"],
+                correct: 1
+            },
+            {
+                question: "If the range of a dataset is 30 and the minimum value is 10, what is the maximum value?",
+                options: ["A) 20", "B) 30", "C) 40", "D) 50"],
+                correct: 2
+            },
+            {
+                question: "In a box plot, what does the middle line in the box represent?",
+                options: ["A) Mean", "B) Mode", "C) Median", "D) Range"],
+                correct: 2
+            },
+
+            // Problem Solving
+            {
+                question: "A farmer has 17 sheep. All but 9 die. How many are left?",
+                options: ["A) 8", "B) 9", "C) 10", "D) 17"],
+                correct: 1
+            },
+            {
+                question: "You have a 3-liter jug and a 5-liter jug. How can you measure exactly 4 liters?",
+                options: ["A) Fill 5L, pour into 3L, empty 3L, pour remaining 2L into 3L, fill 5L again, pour into 3L until full", "B) Fill 3L twice", "C) Fill 5L, drink 1L", "D) Impossible"],
+                correct: 0
+            },
+            {
+                question: "If you're in a race and pass the person in 2nd place, what place are you in now?",
+                options: ["A) 1st", "B) 2nd", "C) 3rd", "D) Last"],
+                correct: 1
+            },
+            {
+                question: "A man lives on the 20th floor. Every morning he takes the elevator down. When he comes home, he takes the elevator to the 10th floor and walks the rest, except on rainy days. Why?",
+                options: ["A) Exercise", "B) He's short and can't reach button 20", "C) Elevator is broken", "D) He likes walking"],
+                correct: 1
+            },
+            {
+                question: "How can you drop a raw egg onto concrete without breaking it?",
+                options: ["A) Wrap it in bubble wrap", "B) Drop it from very low height", "C) Concrete won't break from an egg", "D) Use a hard-boiled egg"],
+                correct: 2
+            },
+            {
+                question: "What gets wetter the more it dries?",
+                options: ["A) Sponge", "B) Towel", "C) Hair", "D) Clothes"],
+                correct: 1
+            },
+            {
+                question: "A man pushes his car to a hotel and tells the owner he's bankrupt. What happened?",
+                options: ["A) Car broke down", "B) Playing Monopoly", "C) Lost his job", "D) Gambling"],
+                correct: 1
+            },
+            {
+                question: "You have 12 balls, 11 weigh the same, 1 is different. Using a balance scale only 3 times, how do you find the different one?",
+                options: ["A) Divide into groups of 4", "B) Divide into groups of 6", "C) Weigh them one by one", "D) Impossible with 3 weighings"],
+                correct: 0
+            },
+            {
+                question: "A snail climbs 3 feet up a wall during the day and slides 2 feet down at night. How many days to reach the top of a 10-foot wall?",
+                options: ["A) 8 days", "B) 9 days", "C) 10 days", "D) 11 days"],
+                correct: 0
+            },
+            {
+                question: "What comes once in a minute, twice in a moment, but never in a thousand years?",
+                options: ["A) The letter M", "B) Time", "C) Opportunity", "D) Luck"],
+                correct: 0
+            },
+
+            // Critical Thinking
+            {
+                question: "All cats are animals. Some animals are dogs. Therefore:",
+                options: ["A) All cats are dogs", "B) Some cats are dogs", "C) No cats are dogs", "D) Cannot be determined"],
+                correct: 3
+            },
+            {
+                question: "If the statement 'All birds can fly' is false, which of these must be true?",
+                options: ["A) No birds can fly", "B) Some birds cannot fly", "C) Most birds cannot fly", "D) Only some birds can fly"],
+                correct: 1
+            },
+            {
+                question: "A study shows that people who eat chocolate are happier. What can we conclude?",
+                options: ["A) Chocolate causes happiness", "B) Happy people eat more chocolate", "C) There's a correlation, but causation is unclear", "D) Chocolate is good for health"],
+                correct: 2
+            },
+            {
+                question: "If A implies B, and B implies C, what can we conclude about A and C?",
+                options: ["A) A implies C", "B) C implies A", "C) A and C are unrelated", "D) A equals C"],
+                correct: 0
+            },
+            {
+                question: "Which assumption is needed for this argument: 'John is tall, so he must be good at basketball'?",
+                options: ["A) John likes sports", "B) Tall people are good at basketball", "C) Basketball requires height", "D) John plays basketball"],
+                correct: 1
+            },
+            {
+                question: "What type of reasoning is this: 'The sun has risen every day for thousands of years, so it will rise tomorrow'?",
+                options: ["A) Deductive", "B) Inductive", "C) Abductive", "D) Circular"],
+                correct: 1
+            },
+            {
+                question: "If 'Either A or B is true' and 'A is false', what can we conclude?",
+                options: ["A) B is false", "B) B is true", "C) Both are false", "D) Cannot determine"],
+                correct: 1
+            },
+            {
+                question: "Which statement is logically equivalent to 'If it rains, then the ground is wet'?",
+                options: ["A) If the ground is wet, then it rained", "B) If the ground is not wet, then it didn't rain", "C) If it doesn't rain, the ground is not wet", "D) Rain and wet ground always occur together"],
+                correct: 1
+            },
+            {
+                question: "What logical fallacy is this: 'Everyone I know likes pizza, so everyone in the world likes pizza'?",
+                options: ["A) False cause", "B) Hasty generalization", "C) Appeal to authority", "D) Circular reasoning"],
+                correct: 1
+            },
+            {
+                question: "In formal logic, what does 'P → Q' mean?",
+                options: ["A) P equals Q", "B) If P then Q", "C) P or Q", "D) P and Q"],
+                correct: 1
+            }
+        ];
+
+        // Shuffle function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startExam() {
+            // Shuffle questions when exam starts
+            shuffledQuestions = shuffleArray(originalQuestions);
+
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('examInterface').style.display = 'block';
+            examStarted = true;
+
+            // Initialize navigation grid
+            initializeNavigation();
+
+            // Start timer
+            startTimer();
+
+            // Load first question
+            loadQuestion(0);
+        }
+
+        function initializeNavigation() {
+            const navGrid = document.getElementById('navGrid');
+            navGrid.innerHTML = '';
+
+            for (let i = 0; i < 100; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'nav-btn unanswered';
+                btn.textContent = i + 1;
+                btn.onclick = () => goToQuestion(i);
+                navGrid.appendChild(btn);
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+
+            document.getElementById('timer').textContent =
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestion = index;
+            const question = shuffledQuestions[index];
+
+            document.getElementById('questionNumber').textContent = `Question ${index + 1}`;
+            document.getElementById('questionText').innerHTML = question.question;
+            document.getElementById('currentQ').textContent = index + 1;
+
+            // Load options
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, i) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+
+                // Check if we're in review mode (results have been calculated)
+                const inReviewMode = document.getElementById('results').style.display === 'none' &&
+                    document.getElementById('examInterface').style.display === 'block' &&
+                    Object.keys(answers).length > 0 &&
+                    document.getElementById('scoreDisplay').textContent !== '';
+
+                if (inReviewMode) {
+                    // In review mode, show correct and incorrect answers
+                    if (i === question.correct) {
+                        optionDiv.classList.add('correct-answer');
+                    }
+                    if (answers[index] === i && i !== question.correct) {
+                        optionDiv.classList.add('wrong-answer');
+                    }
+                    if (answers[index] === i) {
+                        optionDiv.classList.add('selected');
+                    }
+                } else {
+                    // Normal exam mode
+                    if (answers[index] === i) {
+                        optionDiv.classList.add('selected');
+                    }
+                }
+
+                optionDiv.innerHTML = `
+                    <input type="radio" name="question${index}" value="${i}" ${answers[index] === i ? 'checked' : ''} ${inReviewMode ? 'disabled' : ''}>
+                    ${option}
+                `;
+
+                if (!inReviewMode) {
+                    optionDiv.onclick = () => selectAnswer(index, i);
+                }
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            // Update navigation
+            updateNavigation();
+
+            // Update flag button
+            const flagBtn = document.getElementById('flagBtn');
+            flagBtn.textContent = flaggedQuestions.has(index) ? '🚩 Unflag' : '🚩 Flag';
+
+            // Update prev/next buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === 99;
+        }
+
+        function selectAnswer(questionIndex, answerIndex) {
+            answers[questionIndex] = answerIndex;
+
+            // Update option display
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                option.classList.toggle('selected', i === answerIndex);
+                const radio = option.querySelector('input[type="radio"]');
+                radio.checked = i === answerIndex;
+            });
+
+            updateNavigation();
+            updateAnsweredCount();
+        }
+
+        function updateNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach((btn, i) => {
+                btn.className = 'nav-btn';
+
+                if (i === currentQuestion) {
+                    btn.classList.add('current');
+                } else if (flaggedQuestions.has(i)) {
+                    btn.classList.add('flagged');
+                } else if (answers.hasOwnProperty(i)) {
+                    btn.classList.add('answered');
+                } else {
+                    btn.classList.add('unanswered');
+                }
+            });
+        }
+
+        function updateAnsweredCount() {
+            const answeredCount = Object.keys(answers).length;
+            document.getElementById('answered').textContent = `${answeredCount} / 100`;
+        }
+
+        function toggleFlag() {
+            if (flaggedQuestions.has(currentQuestion)) {
+                flaggedQuestions.delete(currentQuestion);
+            } else {
+                flaggedQuestions.add(currentQuestion);
+            }
+
+            document.getElementById('flagged').textContent = flaggedQuestions.size;
+            document.getElementById('flagBtn').textContent =
+                flaggedQuestions.has(currentQuestion) ? '🚩 Unflag' : '🚩 Flag';
+
+            updateNavigation();
+        }
+
+        function goToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                loadQuestion(currentQuestion - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < 99) {
+                loadQuestion(currentQuestion + 1);
+            }
+        }
+
+        function submitExam() {
+            if (confirm('Are you sure you want to submit your exam? This action cannot be undone.')) {
+                clearInterval(timerInterval);
+                calculateResults();
+            }
+        }
+
+        function calculateResults() {
+            let correctAnswers = 0;
+
+            for (let i = 0; i < shuffledQuestions.length; i++) {
+                if (answers[i] === shuffledQuestions[i].correct) {
+                    correctAnswers++;
+                }
+            }
+
+            const percentage = (correctAnswers / shuffledQuestions.length) * 100;
+            let grade;
+
+            if (percentage >= 90) grade = 'A (Excellent)';
+            else if (percentage >= 80) grade = 'B (Very Good)';
+            else if (percentage >= 70) grade = 'C (Good)';
+            else if (percentage >= 60) grade = 'D (Satisfactory)';
+            else grade = 'F (Fail)';
+
+            document.getElementById('examInterface').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('scoreDisplay').textContent = `${correctAnswers}/100 (${percentage.toFixed(1)}%)`;
+            document.getElementById('gradeDisplay').textContent = `Grade: ${grade}`;
+        }
+
+        function reviewAnswers() {
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('examInterface').style.display = 'block';
+
+            // Disable submit button and navigation in review mode
+            document.querySelector('.btn-success').style.display = 'none';
+
+            // Add a "Back to Results" button
+            const backBtn = document.createElement('button');
+            backBtn.className = 'btn btn-secondary';
+            backBtn.textContent = 'Back to Results';
+            backBtn.onclick = () => {
+                document.getElementById('examInterface').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                document.querySelector('.btn-success').style.display = 'inline-block';
+                backBtn.remove();
+            };
+            document.querySelector('.controls').appendChild(backBtn);
+
+            loadQuestion(0);
+        }
+
+        function restartExam() {
+            currentQuestion = 0;
+            answers = {};
+            flaggedQuestions.clear();
+            timeRemaining = 180 * 60;
+            shuffledQuestions = [];
+
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+        }
+
+        // Initialize timer display
+        updateTimerDisplay();
+    </script>
+</body>
+
+</html>
