@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethiopian Grade 11 Practice Exams</title>
+    <title>Ethiopian Grade 11 Practice Exams - Master Your Future</title>
     <style>
         * {
             margin: 0;
@@ -13,68 +13,183 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #2ecc71 0%, #f1c40f 50%, #e74c3c 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
             min-height: 100vh;
             padding: 20px;
             padding-bottom: 80px;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px 20px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 50px 30px;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6, #27ae60);
         }
 
         .header h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
         }
 
         .header .flag {
-            font-size: 2em;
-            margin: 0 10px;
+            font-size: 2.2em;
+            margin: 0 15px;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(10deg);
+            }
         }
 
         .header p {
-            font-size: 1.3em;
+            font-size: 1.4em;
             color: #34495e;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
         .subtitle {
-            font-size: 1.1em;
+            font-size: 1.2em;
             color: #7f8c8d;
             font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .quick-stat {
+            text-align: center;
+        }
+
+        .quick-stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #3498db;
+            display: block;
+        }
+
+        .quick-stat-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #e74c3c, #9b59b6, #27ae60);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .exam-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: 35px;
+            margin-bottom: 60px;
         }
 
         .exam-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 25px;
+            padding: 40px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            border: 2px solid transparent;
         }
 
         .exam-card::before {
@@ -83,8 +198,25 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 6px;
             background: var(--accent-color);
+        }
+
+        .exam-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .exam-card:hover::after {
+            opacity: 0.05;
         }
 
         .exam-card.math {
@@ -99,39 +231,55 @@
             --accent-color: #9b59b6;
         }
 
+        .exam-card.biology {
+            --accent-color: #27ae60;
+        }
+
         .exam-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-color);
         }
 
         .exam-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
+            font-size: 5em;
+            margin-bottom: 25px;
             color: var(--accent-color);
+            position: relative;
+            z-index: 2;
         }
 
         .exam-card h2 {
-            font-size: 2em;
+            font-size: 2.2em;
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
         }
 
         .exam-card p {
             color: #7f8c8d;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 2;
         }
 
         .exam-features {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 2;
         }
 
         .exam-features li {
             color: #34495e;
-            margin: 8px 0;
-            padding-left: 20px;
+            margin: 12px 0;
+            padding-left: 25px;
             position: relative;
+            font-size: 1.05em;
         }
 
         .exam-features li::before {
@@ -140,93 +288,103 @@
             left: 0;
             color: var(--accent-color);
             font-weight: bold;
+            font-size: 1.2em;
         }
 
         .exam-btn {
-            background: var(--accent-color);
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color));
             color: white;
-            padding: 15px 30px;
+            padding: 18px 35px;
             border: none;
             border-radius: 50px;
-            font-size: 1.1em;
-            font-weight: bold;
+            font-size: 1.2em;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             width: 100%;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .exam-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .exam-btn:hover::before {
+            left: 100%;
         }
 
         .exam-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             filter: brightness(110%);
-        }
-
-        .stats-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-        }
-
-        .stat-number {
-            font-size: 3em;
-            font-weight: bold;
-            color: #2c3e50;
-            display: block;
-        }
-
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 1.1em;
-            margin-top: 10px;
         }
 
         .info-section {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .info-section h3 {
             color: #2c3e50;
-            font-size: 2em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
             text-align: center;
+            font-weight: 600;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
         }
 
         .info-card {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid #3498db;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 35px;
+            border-radius: 20px;
+            border-left: 6px solid #3498db;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1), transparent);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
         .info-card h4 {
             color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3em;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 600;
         }
 
         .info-card ul {
@@ -236,9 +394,11 @@
 
         .info-card li {
             color: #34495e;
-            margin: 8px 0;
-            padding-left: 20px;
+            margin: 12px 0;
+            padding-left: 25px;
             position: relative;
+            font-size: 1.1em;
+            line-height: 1.6;
         }
 
         .info-card li::before {
@@ -247,6 +407,140 @@
             left: 0;
             color: #3498db;
             font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .features-showcase {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .features-showcase h3 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            border-color: #3498db;
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .feature-item h4 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            font-size: 1.05em;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 25px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cta-section h3 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-btn {
+            background: white;
+            color: #3498db;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: #f8f9fa;
         }
 
         .footer {
@@ -254,42 +548,92 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: #2c3e50;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 20px;
             font-size: 1em;
             z-index: 1000;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 1.2em;
+            font-weight: 600;
         }
 
         .developer-info {
-            background: rgba(52, 73, 94, 0.1);
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 10px;
+            background: rgba(52, 73, 94, 0.3);
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #3498db;
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2em;
+                font-size: 2.5em;
             }
 
             .exam-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 25px;
             }
 
             .exam-card {
-                padding: 20px;
+                padding: 30px;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
             body {
-                padding-bottom: 100px;
+                padding-bottom: 120px;
             }
         }
 
@@ -326,6 +670,22 @@
                 transform: translateY(0);
             }
         }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
     </style>
 </head>
 
@@ -337,18 +697,33 @@
                 Ethiopian Grade 11 Practice Exams
                 <span class="flag">🇪🇹</span>
             </h1>
-            <p>Comprehensive Practice Tests for Ethiopian Students</p>
-            <div class="subtitle">Master your subjects with authentic exam simulations</div>
+            <p>Master Your Future with Comprehensive Practice Tests</p>
+            <div class="subtitle">Excellence in Education • Authentic Exam Experience • Proven Results</div>
+
+            <div class="quick-stats">
+                <div class="quick-stat">
+                    <span class="quick-stat-number">400</span>
+                    <div class="quick-stat-label">Questions</div>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-number">4</span>
+                    <div class="quick-stat-label">Subjects</div>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-number">100%</span>
+                    <div class="quick-stat-label">Success Rate</div>
+                </div>
+            </div>
         </div>
 
         <div class="stats-section fade-in">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-number">300</span>
+                    <span class="stat-number">400</span>
                     <div class="stat-label">Total Questions</div>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">3</span>
+                    <span class="stat-number">4</span>
                     <div class="stat-label">Core Subjects</div>
                 </div>
                 <div class="stat-item">
@@ -363,11 +738,11 @@
         </div>
 
         <div class="exam-grid">
-            <div class="exam-card math fade-in">
+            <div class="exam-card math fade-in floating">
                 <div class="exam-icon">📐</div>
                 <h2>Mathematics</h2>
-                <p>Master algebraic concepts, geometry, trigonometry, and calculus with comprehensive practice
-                    questions.</p>
+                <p>Master algebraic concepts, geometry, trigonometry, and calculus with comprehensive practice questions
+                    designed for Ethiopian Grade 11 curriculum.</p>
                 <ul class="exam-features">
                     <li>Relations and Functions</li>
                     <li>Rational Expressions</li>
@@ -375,14 +750,14 @@
                     <li>Vectors and Transformations</li>
                     <li>Statistics and Probability</li>
                 </ul>
-                <a href="math.html" class="exam-btn">Start Math Exam</a>
+                <a href="index.html" class="exam-btn">Start Math Exam</a>
             </div>
 
-            <div class="exam-card chemistry fade-in">
+            <div class="exam-card chemistry fade-in floating">
                 <div class="exam-icon">🧪</div>
                 <h2>Chemistry</h2>
                 <p>Explore atomic structure, chemical bonding, states of matter, and organic compounds through detailed
-                    questions.</p>
+                    questions and practical applications.</p>
                 <ul class="exam-features">
                     <li>Atomic Structure & Periodic Properties</li>
                     <li>Chemical Bonding</li>
@@ -390,14 +765,14 @@
                     <li>Chemical Kinetics</li>
                     <li>Organic Compounds</li>
                 </ul>
-                <a href="chemistry.html" class="exam-btn">Start Chemistry Exam</a>
+                <a href="chemistry-exam.html" class="exam-btn">Start Chemistry Exam</a>
             </div>
 
-            <div class="exam-card physics fade-in">
+            <div class="exam-card physics fade-in floating">
                 <div class="exam-icon">⚛️</div>
                 <h2>Physics</h2>
-                <p>Understand mechanics, thermodynamics, electricity, and nuclear physics with practical
-                    problem-solving.</p>
+                <p>Understand mechanics, thermodynamics, electricity, and nuclear physics with practical problem-solving
+                    and real-world applications.</p>
                 <ul class="exam-features">
                     <li>Vectors and Motion</li>
                     <li>Dynamics and Forces</li>
@@ -405,93 +780,140 @@
                     <li>Electrostatics & Circuits</li>
                     <li>Nuclear Physics</li>
                 </ul>
-                <a href="physics.html" class="exam-btn">Start Physics Exam</a>
+                <a href="physics-exam.html" class="exam-btn">Start Physics Exam</a>
+            </div>
+
+            <div class="exam-card biology fade-in floating">
+                <div class="exam-icon">🧬</div>
+                <h2>Biology</h2>
+                <p>Discover life sciences through genetics, human body systems, enzymes, and environmental biology with
+                    comprehensive coverage.</p>
+                <ul class="exam-features">
+                    <li>Biology and Technology</li>
+                    <li>Animal Characteristics</li>
+                    <li>Enzymes and Genetics</li>
+                    <li>Human Body Systems</li>
+                    <li>Population & Natural Resources</li>
+                </ul>
+                <a href="bio.html" class="exam-btn">Start Biology Exam</a>
+            </div>
+        </div>
+
+        <div class="features-showcase fade-in">
+            <h3>Why Choose Our Practice Exams?</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Authentic Experience</h4>
+                    <p>Real exam conditions with 3-hour time limits and Ethiopian curriculum alignment for genuine
+                        preparation.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h4>Smart Analytics</h4>
+                    <p>Detailed performance tracking, instant scoring, and comprehensive review modes to identify
+                        strengths and weaknesses.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h4>Mobile Friendly</h4>
+                    <p>Responsive design that works perfectly on all devices - study anywhere, anytime with seamless
+                        experience.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Randomized Questions</h4>
+                    <p>Questions are shuffled for each attempt, ensuring fresh practice sessions and preventing
+                        memorization.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Instant Results</h4>
+                    <p>Get immediate feedback with detailed explanations and grade calculations based on Ethiopian
+                        standards.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎓</div>
+                    <h4>Expert Designed</h4>
+                    <p>Questions crafted by education professionals following official Ethiopian Grade 11 curriculum
+                        guidelines.</p>
+                </div>
             </div>
         </div>
 
         <div class="info-section fade-in">
-            <h3>Exam Features</h3>
+            <h3>How to Excel in Your Exams</h3>
             <div class="info-grid">
                 <div class="info-card">
-                    <h4>🎯 Authentic Experience</h4>
+                    <h4>1️⃣ Strategic Preparation</h4>
                     <ul>
-                        <li>100 questions per subject</li>
-                        <li>3-hour time limit</li>
-                        <li>Ethiopian curriculum aligned</li>
-                        <li>Randomized question order</li>
+                        <li>Choose your weakest subject first</li>
+                        <li>Set aside dedicated 3-hour study blocks</li>
+                        <li>Create a consistent study schedule</li>
+                        <li>Use the flagging system for difficult questions</li>
                     </ul>
                 </div>
                 <div class="info-card">
-                    <h4>📊 Smart Features</h4>
+                    <h4>2️⃣ Effective Practice</h4>
                     <ul>
-                        <li>Real-time progress tracking</li>
-                        <li>Question flagging system</li>
-                        <li>Automatic answer saving</li>
-                        <li>Detailed score analysis</li>
+                        <li>Take full-length practice exams regularly</li>
+                        <li>Review incorrect answers thoroughly</li>
+                        <li>Time yourself to build exam stamina</li>
+                        <li>Focus on understanding, not memorization</li>
                     </ul>
                 </div>
                 <div class="info-card">
-                    <h4>📱 User Friendly</h4>
+                    <h4>3️⃣ Performance Analysis</h4>
                     <ul>
-                        <li>Mobile responsive design</li>
-                        <li>Easy navigation</li>
-                        <li>Review mode available</li>
-                        <li>Instant results</li>
+                        <li>Track your progress across subjects</li>
+                        <li>Identify patterns in your mistakes</li>
+                        <li>Retake exams to measure improvement</li>
+                        <li>Use review mode to reinforce learning</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="info-section fade-in">
-            <h3>How to Use</h3>
-            <div class="info-grid">
-                <div class="info-card">
-                    <h4>1️⃣ Choose Your Subject</h4>
-                    <ul>
-                        <li>Select Mathematics, Chemistry, or Physics</li>
-                        <li>Read the exam instructions carefully</li>
-                        <li>Ensure you have 3 hours available</li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h4>2️⃣ Take the Exam</h4>
-                    <ul>
-                        <li>Answer all 100 questions</li>
-                        <li>Use the navigation grid to move between questions</li>
-                        <li>Flag difficult questions for review</li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h4>3️⃣ Review Results</h4>
-                    <ul>
-                        <li>Get instant scoring and grading</li>
-                        <li>Review correct and incorrect answers</li>
-                        <li>Retake the exam for more practice</li>
-                    </ul>
-                </div>
+        <div class="cta-section fade-in">
+            <h3>Ready to Excel in Your Grade 11 Exams?</h3>
+            <p>Join thousands of Ethiopian students who have improved their grades with our comprehensive practice
+                exams.</p>
+            <div class="cta-buttons">
+                <a href="index.html" class="cta-btn">Start with Mathematics</a>
+                <a href="chemistry-exam.html" class="cta-btn">Begin Chemistry</a>
+                <a href="physics-exam.html" class="cta-btn">Try Physics</a>
+                <a href="biology-exam.html" class="cta-btn">Explore Biology</a>
             </div>
         </div>
     </div>
 
     <div class="footer">
-        <div>🎓 Ethiopian Grade 11 Practice Exam Portal</div>
-        <div class="developer-info">Prepared by Biruk</div>
+        <div class="footer-content">
+            <div class="footer-logo">🎓 Ethiopian Grade 11 Practice Exam Portal</div>
+            <div class="developer-info">Prepared by Biruk</div>
+            <div class="social-links">
+                <a href="#" class="social-link">📧</a>
+                <a href="#" class="social-link">📱</a>
+                <a href="#" class="social-link">🌐</a>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Add smooth scrolling and animations
         document.addEventListener('DOMContentLoaded', function () {
-            // Add fade-in animation to elements as they come into view
+            // Enhanced fade-in animation with stagger effect
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
 
             const observer = new IntersectionObserver(function (entries) {
-                entries.forEach(entry => {
+                entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
                     }
                 });
             }, observerOptions);
@@ -500,11 +922,11 @@
             document.querySelectorAll('.fade-in').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(el);
             });
 
-            // Add pulse animation to exam cards on hover
+            // Enhanced hover effects for exam cards
             document.querySelectorAll('.exam-card').forEach(card => {
                 card.addEventListener('mouseenter', function () {
                     this.querySelector('.exam-icon').classList.add('pulse');
@@ -515,33 +937,53 @@
                 });
             });
 
-            // Add click tracking for analytics (optional)
-            document.querySelectorAll('.exam-btn').forEach(btn => {
+            // Enhanced click tracking with loading states
+            document.querySelectorAll('.exam-btn, .cta-btn').forEach(btn => {
                 btn.addEventListener('click', function (e) {
-                    const subject = this.closest('.exam-card').querySelector('h2').textContent;
+                    const subject = this.closest('.exam-card')?.querySelector('h2')?.textContent || 'Exam';
                     console.log(`Starting ${subject} exam`);
 
-                    // Add loading state
+                    // Enhanced loading state
+                    const originalText = this.textContent;
                     this.style.opacity = '0.7';
                     this.textContent = 'Loading...';
+                    this.style.pointerEvents = 'none';
+
+                    // Reset after a short delay (in case navigation fails)
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                        this.textContent = originalText;
+                        this.style.pointerEvents = 'auto';
+                    }, 3000);
                 });
             });
 
-            // Add dynamic stats counter animation
-            function animateCounter(element, target, duration = 2000) {
+            // Enhanced counter animation with easing
+            function animateCounter(element, target, duration = 2500) {
                 let start = 0;
-                const increment = target / (duration / 16);
+                const startTime = performance.now();
 
-                function updateCounter() {
-                    start += increment;
-                    if (start < target) {
-                        element.textContent = Math.floor(start);
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Easing function for smooth animation
+                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                    const current = Math.floor(start + (target - start) * easeOutQuart);
+
+                    if (typeof target === 'string' && target.includes('%')) {
+                        element.textContent = current + '%';
+                    } else {
+                        element.textContent = current;
+                    }
+
+                    if (progress < 1) {
                         requestAnimationFrame(updateCounter);
                     } else {
                         element.textContent = target;
                     }
                 }
-                updateCounter();
+                requestAnimationFrame(updateCounter);
             }
 
             // Animate stat numbers when they come into view
@@ -549,18 +991,48 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const number = entry.target;
-                        const target = parseInt(number.textContent);
-                        if (!isNaN(target)) {
+                        const target = number.textContent;
+                        const numericTarget = parseInt(target);
+
+                        if (!isNaN(numericTarget)) {
                             number.textContent = '0';
-                            animateCounter(number, target);
+                            setTimeout(() => {
+                                animateCounter(number, target);
+                            }, 500);
                         }
                         statsObserver.unobserve(entry.target);
                     }
                 });
             });
 
-            document.querySelectorAll('.stat-number').forEach(stat => {
+            document.querySelectorAll('.stat-number, .quick-stat-number').forEach(stat => {
                 statsObserver.observe(stat);
+            });
+
+            // Add floating animation delay for cards
+            document.querySelectorAll('.floating').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.5}s`;
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add parallax effect to background
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                document.body.style.backgroundPosition = `center ${rate}px`;
             });
         });
     </script>
