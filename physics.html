@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopian Grade 11 Physics Practice Exam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 60px; /* Space for footer */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .exam-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-item h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .exam-content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .question-nav {
+            width: 250px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-right: 2px solid #e9ecef;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.unanswered {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+
+        .nav-btn.answered {
+            background: #28a745;
+            color: white;
+        }
+
+        .nav-btn.current {
+            background: #3498db;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .nav-btn.flagged {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .question-area {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .question-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .flag-btn {
+            background: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        .physics-formula {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            text-align: center;
+            border-left: 4px solid #3498db;
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #3498db;
+            color: white;
+        }
+
+        .option.correct-answer {
+            background: #d4edda !important;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .option.wrong-answer {
+            background: #f8d7da !important;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .option.correct-answer:hover {
+            background: #d4edda !important;
+            transform: none;
+        }
+
+        .option.wrong-answer:hover {
+            background: #f8d7da !important;
+            transform: none;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .results {
+            display: none;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 3em;
+            font-weight: bold;
+            color: #28a745;
+            margin: 20px 0;
+        }
+
+        .grade {
+            font-size: 2em;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .start-screen {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .start-btn {
+            background: #3498db;
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin: 8px 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .exam-content {
+                flex-direction: column;
+            }
+            
+            .question-nav {
+                width: 100%;
+                order: 2;
+            }
+            
+            .nav-grid {
+                grid-template-columns: repeat(10, 1fr);
+            }
+
+            body {
+                padding-bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚛️ Ethiopian Grade 11 Physics</h1>
+            <p>Practice Examination</p>
+        </div>
+
+        <div id="startScreen" class="start-screen">
+            <h2>Welcome to the Grade 11 Physics Practice Exam</h2>
+
+            <div class="instructions">
+                <h3>Instructions:</h3>
+                <ul>
+                    <li>This exam contains 100 multiple-choice questions</li>
+                    <li>Time limit: 3 hours (180 minutes)</li>
+                    <li>Each question has 4 options (A, B, C, D)</li>
+                    <li>Questions cover all major topics from the Grade 11 Physics curriculum</li>
+                    <li>You can navigate between questions using the question grid</li>
+                    <li>Flag questions for review if needed</li>
+                    <li>Your answers are automatically saved</li>
+                    <li>Click "Submit Exam" when you're finished</li>
+                </ul>
+            </div>
+            <button class="start-btn" onclick="startExam()">Start Exam</button>
+        </div>
+
+        <div id="examInterface" style="display: none;">
+            <div class="exam-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>Time Remaining</h3>
+                        <div id="timer" class="timer">03:00:00</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Questions Answered</h3>
+                        <div id="answered">0 / 100</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Current Question</h3>
+                        <div id="currentQ">1</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Flagged Questions</h3>
+                        <div id="flagged">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exam-content">
+                <div class="question-nav">
+                    <h3>Question Navigation</h3>
+                    <div id="navGrid" class="nav-grid"></div>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn unanswered" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Unanswered</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn answered" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Answered</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn flagged" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Flagged</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-area">
+                    <div class="question-header">
+                        <div class="question-number" id="questionNumber">Question 1</div>
+                        <button class="flag-btn" id="flagBtn" onclick="toggleFlag()">🚩 Flag</button>
+                    </div>
+
+                    <div class="question-text" id="questionText"></div>
+
+                    <div class="options" id="options"></div>
+
+                    <div class="controls">
+                        <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+                        <button class="btn btn-success" onclick="submitExam()">Submit Exam</button>
+                        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="results" class="results">
+            <h2>Exam Results</h2>
+            <div class="score-display" id="scoreDisplay"></div>
+            <div class="grade" id="gradeDisplay"></div>
+            <button class="btn btn-primary" onclick="reviewAnswers()">Review Answers</button>
+            <button class="btn btn-secondary" onclick="restartExam()">Take Again</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Prepared by Biruk
+    </div>
+
+    <script>
+        // Exam data and state
+        let currentQuestion = 0;
+        let answers = {};
+        let flaggedQuestions = new Set();
+        let timeRemaining = 180 * 60; // 3 hours in seconds
+        let timerInterval;
+        let examStarted = false;
+        let shuffledQuestions = [];
+
+        // Original physics questions array
+        const originalQuestions = [
+            // Physics and Human Society
+            {
+                question: "Which of the following is NOT a branch of physics?",
+                options: ["A) Mechanics", "B) Thermodynamics", "C) Biochemistry", "D) Optics"],
+                correct: 2
+            },
+            {
+                question: "The SI unit of force is:",
+                options: ["A) Joule", "B) Newton", "C) Watt", "D) Pascal"],
+                correct: 1
+            },
+            {
+                question: "Physics is important in medicine because:",
+                options: ["A) It helps in X-ray imaging", "B) It explains MRI technology", "C) It's used in laser surgery", "D) All of the above"],
+                correct: 3
+            },
+            {
+                question: "The study of motion is called:",
+                options: ["A) Statics", "B) Dynamics", "C) Kinematics", "D) Mechanics"],
+                correct: 3
+            },
+            {
+                question: "Which physicist developed the theory of relativity?",
+                options: ["A) Newton", "B) Einstein", "C) Galileo", "D) Kepler"],
+                correct: 1
+            },
+
+            // Vectors
+            {
+                question: "A vector quantity has both:",
+                options: ["A) Mass and weight", "B) Speed and direction", "C) Magnitude and direction", "D) Force and acceleration"],
+                correct: 2
+            },
+            {
+                question: "Which of the following is a scalar quantity?",
+                options: ["A) Velocity", "B) Displacement", "C) Force", "D) Speed"],
+                correct: 3
+            },
+            {
+                question: "The magnitude of vector A = 3i + 4j is:",
+                options: ["A) 3", "B) 4", "C) 5", "D) 7"],
+                correct: 2
+            },
+            {
+                question: "Two vectors are perpendicular when their dot product is:",
+                options: ["A) Maximum", "B) Minimum", "C) Zero", "D) One"],
+                correct: 2
+            },
+            {
+                question: "The resultant of two vectors of magnitude 3 and 4 acting at right angles is:",
+                options: ["A) 1", "B) 5", "C) 7", "D) 12"],
+                correct: 1
+            },
+            {
+                question: "Vector addition is:",
+                options: ["A) Commutative", "B) Associative", "C) Both A and B", "D) Neither A nor B"],
+                correct: 2
+            },
+            {
+                question: "The unit vector in the direction of vector A = 6i + 8j is:",
+                options: ["A) 0.6i + 0.8j", "B) 3i + 4j", "C) 6i + 8j", "D) i + j"],
+                correct: 0
+            },
+            {
+                question: "If A⃗ · B⃗ = AB cos θ, then θ is the angle between:",
+                options: ["A) A⃗ and x-axis", "B) B⃗ and y-axis", "C) A⃗ and B⃗", "D) Resultant and x-axis"],
+                correct: 2
+            },
+            {
+                question: "The cross product A⃗ × B⃗ gives a vector:",
+                options: ["A) Parallel to A⃗", "B) Parallel to B⃗", "C) Perpendicular to both A⃗ and B⃗", "D) In the plane of A⃗ and B⃗"],
+                correct: 2
+            },
+            {
+                question: "The components of a vector A making angle θ with x-axis are:",
+                options: ["A) A cos θ, A sin θ", "B) A sin θ, A cos θ", "C) A tan θ, A cot θ", "D) A sec θ, A cosec θ"],
+                correct: 0
+            },
+            {
+                question: "Two vectors are equal if they have:",
+                options: ["A) Same magnitude", "B) Same direction", "C) Same magnitude and direction", "D) Same starting point"],
+                correct: 2
+            },
+            {
+                question: "The negative of vector A⃗ has:",
+                options: ["A) Same magnitude, opposite direction", "B) Different magnitude, same direction", "C) Same magnitude and direction", "D) Different magnitude and direction"],
+                correct: 0
+            },
+            {
+                question: "In vector subtraction A⃗ - B⃗, we add:",
+                options: ["A) A⃗ and B⃗", "B) A⃗ and -B⃗", "C) -A⃗ and B⃗", "D) -A⃗ and -B⃗"],
+                correct: 1
+            },
+
+            // Motion in one and two dimensions
+            {
+                question: "Displacement is a:",
+                options: ["A) Scalar quantity", "B) Vector quantity", "C) Dimensionless quantity", "D) Fundamental quantity"],
+                correct: 1
+            },
+            {
+                question: "The slope of a position-time graph gives:",
+                options: ["A) Displacement", "B) Velocity", "C) Acceleration", "D) Distance"],
+                correct: 1
+            },
+            {
+                question: "For uniformly accelerated motion, v = u + at. Here 'a' represents:",
+                options: ["A) Initial velocity", "B) Final velocity", "C) Acceleration", "D) Time"],
+                correct: 2
+            },
+            {
+                question: "A ball is thrown vertically upward. At the highest point:",
+                options: ["A) Velocity is maximum", "B) Acceleration is zero", "C) Velocity is zero", "D) Both velocity and acceleration are zero"],
+                correct: 2
+            },
+            {
+                question: "The equation s = ut + ½at² gives:",
+                options: ["A) Velocity", "B) Acceleration", "C) Displacement", "D) Time"],
+                correct: 2
+            },
+            {
+                question: "In projectile motion, the horizontal component of velocity:",
+                options: ["A) Increases", "B) Decreases", "C) Remains constant", "D) First increases then decreases"],
+                correct: 2
+            },
+            {
+                question: "The range of a projectile is maximum when the angle of projection is:",
+                options: ["A) 30°", "B) 45°", "C) 60°", "D) 90°"],
+                correct: 1
+            },
+            {
+                question: "In circular motion, the acceleration is directed:",
+                options: ["A) Tangentially", "B) Radially inward", "C) Radially outward", "D) Vertically upward"],
+                correct: 1
+            },
+            {
+                question: "The time of flight of a projectile depends on:",
+                options: ["A) Horizontal component of velocity", "B) Vertical component of velocity", "C) Both components", "D) Mass of projectile"],
+                correct: 1
+            },
+            {
+                question: "Angular velocity is measured in:",
+                options: ["A) rad/s", "B) m/s", "C) m/s²", "D) rad/s²"],
+                correct: 0
+            },
+            {
+                question: "The centripetal acceleration of an object in circular motion is:",
+                options: ["A) v²/r", "B) vr", "C) v/r", "D) v²r"],
+                correct: 0
+            },
+            {
+                question: "For an object in free fall, the acceleration is:",
+                options: ["A) Zero", "B) 9.8 m/s² downward", "C) 9.8 m/s² upward", "D) Variable"],
+                correct: 1
+            },
+            {
+                question: "The area under a velocity-time graph gives:",
+                options: ["A) Acceleration", "B) Displacement", "C) Distance", "D) Speed"],
+                correct: 1
+            },
+            {
+                question: "In uniform circular motion, which quantity remains constant?",
+                options: ["A) Velocity", "B) Speed", "C) Acceleration", "D) Angular acceleration"],
+                correct: 1
+            },
+
+            // Dynamics
+            {
+                question: "Newton's first law is also known as:",
+                options: ["A) Law of acceleration", "B) Law of inertia", "C) Law of action-reaction", "D) Law of gravitation"],
+                correct: 1
+            },
+            {
+                question: "The SI unit of momentum is:",
+                options: ["A) kg⋅m/s", "B) kg⋅m/s²", "C) N⋅s", "D) Both A and C"],
+                correct: 3
+            },
+            {
+                question: "According to Newton's second law, F = ma. This means force is:",
+                options: ["A) Directly proportional to mass", "B) Directly proportional to acceleration", "C) Both A and B", "D) Inversely proportional to acceleration"],
+                correct: 2
+            },
+            {
+                question: "Newton's third law states that:",
+                options: ["A) Force equals mass times acceleration", "B) Every action has an equal and opposite reaction", "C) Objects at rest stay at rest", "D) Force is proportional to momentum"],
+                correct: 1
+            },
+            {
+                question: "The weight of an object is:",
+                options: ["A) Mass of the object", "B) Force due to gravity", "C) Volume of the object", "D) Density of the object"],
+                correct: 1
+            },
+            {
+                question: "Friction always acts:",
+                options: ["A) In the direction of motion", "B) Opposite to the direction of motion", "C) Perpendicular to motion", "D) At 45° to motion"],
+                correct: 1
+            },
+            {
+                question: "The coefficient of friction is:",
+                options: ["A) Always greater than 1", "B) Always less than 1", "C) Dimensionless", "D) Measured in Newtons"],
+                correct: 2
+            },
+            {
+                question: "Impulse is equal to:",
+                options: ["A) Force × time", "B) Change in momentum", "C) Both A and B", "D) Mass × velocity"],
+                correct: 2
+            },
+            {
+                question: "Conservation of momentum applies when:",
+                options: ["A) External force is zero", "B) Internal forces are present", "C) System is isolated", "D) Both A and C"],
+                correct: 3
+            },
+            {
+                question: "The normal force is:",
+                options: ["A) Always equal to weight", "B) Perpendicular to the surface", "C) In the direction of motion", "D) Always horizontal"],
+                correct: 1
+            },
+            {
+                question: "Static friction is:",
+                options: ["A) Greater than kinetic friction", "B) Less than kinetic friction", "C) Equal to kinetic friction", "D) Independent of normal force"],
+                correct: 0
+            },
+            {
+                question: "The force required to keep an object moving at constant velocity is:",
+                options: ["A) Equal to its weight", "B) Equal to friction force", "C) Zero", "D) Equal to applied force"],
+                correct: 1
+            },
+            {
+                question: "In an elastic collision:",
+                options: ["A) Momentum is conserved", "B) Kinetic energy is conserved", "C) Both momentum and kinetic energy are conserved", "D) Neither momentum nor kinetic energy is conserved"],
+                correct: 2
+            },
+            {
+                question: "The center of mass of a system:",
+                options: ["A) Always lies within the system", "B) May lie outside the system", "C) Is always at the geometric center", "D) Depends on the reference frame"],
+                correct: 1
+            },
+
+            // Heat Conduction and Calorimetry
+            {
+                question: "Heat is a form of:",
+                options: ["A) Matter", "B) Energy", "C) Force", "D) Momentum"],
+                correct: 1
+            },
+            {
+                question: "The SI unit of heat is:",
+                options: ["A) Calorie", "B) Joule", "C) Kelvin", "D) Watt"],
+                correct: 1
+            },
+            {
+                question: "Temperature is a measure of:",
+                options: ["A) Total heat energy", "B) Average kinetic energy of molecules", "C) Total kinetic energy", "D) Potential energy"],
+                correct: 1
+            },
+            {
+                question: "Heat flows from:",
+                options: ["A) Lower to higher temperature", "B) Higher to lower temperature", "C) Equal temperatures", "D) Depends on mass"],
+                correct: 1
+            },
+            {
+                question: "The specific heat capacity is:",
+                options: ["A) Heat per unit mass", "B) Heat per unit temperature", "C) Heat per unit mass per unit temperature change", "D) Heat per unit volume"],
+                correct: 2
+            },
+            {
+                question: "In thermal equilibrium, two objects have the same:",
+                options: ["A) Heat", "B) Temperature", "C) Mass", "D) Specific heat"],
+                correct: 1
+            },
+            {
+                question: "The rate of heat conduction depends on:",
+                options: ["A) Temperature difference", "B) Cross-sectional area", "C) Length of conductor", "D) All of the above"],
+                correct: 3
+            },
+            {
+                question: "Good conductors of heat are usually:",
+                options: ["A) Metals", "B) Non-metals", "C) Gases", "D) Liquids"],
+                correct: 0
+            },
+            {
+                question: "The principle of calorimetry states that:",
+                options: ["A) Heat gained = Heat lost", "B) Temperature gained = Temperature lost", "C) Mass gained = Mass lost", "D) Energy is created"],
+                correct: 0
+            },
+            {
+                question: "Latent heat is the heat required for:",
+                options: ["A) Raising temperature", "B) Phase change", "C) Lowering temperature", "D) Chemical reaction"],
+                correct: 1
+            },
+            {
+                question: "The thermal conductivity of a material is:",
+                options: ["A) Temperature dependent", "B) Material property", "C) Both A and B", "D) Neither A nor B"],
+                correct: 2
+            },
+            {
+                question: "Heat capacity is measured in:",
+                options: ["A) J/K", "B) J/kg⋅K", "C) J/mol⋅K", "D) J"],
+                correct: 0
+            },
+            {
+                question: "The zeroth law of thermodynamics deals with:",
+                options: ["A) Energy conservation", "B) Entropy", "C) Thermal equilibrium", "D) Heat engines"],
+                correct: 2
+            },
+
+            // Electrostatics and Electric Circuit
+            {
+                question: "Electric charge is:",
+                options: ["A) Always positive", "B) Always negative", "C) Can be positive or negative", "D) Always neutral"],
+                correct: 2
+            },
+            {
+                question: "The SI unit of electric charge is:",
+                options: ["A) Ampere", "B) Coulomb", "C) Volt", "D) Ohm"],
+                correct: 1
+            },
+            {
+                question: "Like charges:",
+                options: ["A) Attract each other", "B) Repel each other", "C) Have no effect", "D) Neutralize each other"],
+                correct: 1
+            },
+            {
+                question: "Coulomb's law states that the force between two charges is:",
+                options: ["A) Directly proportional to the product of charges", "B) Inversely proportional to square of distance", "C) Both A and B", "D) Neither A nor B"],
+                correct: 2
+            },
+            {
+                question: "Electric field is defined as:",
+                options: ["A) Force per unit charge", "B) Charge per unit force", "C) Energy per unit charge", "D) Work per unit charge"],
+                correct: 0
+            },
+            {
+                question: "The electric field inside a conductor is:",
+                options: ["A) Maximum", "B) Minimum", "C) Zero", "D) Variable"],
+                correct: 2
+            },
+            {
+                question: "Electric potential is measured in:",
+                options: ["A) Joules", "B) Coulombs", "C) Volts", "D) Amperes"],
+                correct: 2
+            },
+            {
+                question: "Ohm's law states that V = IR, where R is:",
+                options: ["A) Resistance", "B) Reactance", "C) Reluctance", "D) Resonance"],
+                correct: 0
+            },
+            {
+                question: "In a series circuit, the current is:",
+                options: ["A) Different in each resistor", "B) Same in each resistor", "C) Zero", "D) Maximum in the first resistor"],
+                correct: 1
+            },
+            {
+                question: "In a parallel circuit, the voltage across each resistor is:",
+                options: ["A) Different", "B) Same", "C) Zero", "D) Inversely proportional to resistance"],
+                correct: 1
+            },
+            {
+                question: "The power dissipated in a resistor is given by:",
+                options: ["A) P = VI", "B) P = I²R", "C) P = V²/R", "D) All of the above"],
+                correct: 3
+            },
+            {
+                question: "A capacitor stores:",
+                options: ["A) Current", "B) Voltage", "C) Electric charge", "D) Magnetic field"],
+                correct: 2
+            },
+            {
+                question: "The capacitance of a parallel plate capacitor depends on:",
+                options: ["A) Area of plates", "B) Distance between plates", "C) Dielectric constant", "D) All of the above"],
+                correct: 3
+            },
+            {
+                question: "Electric current is the flow of:",
+                options: ["A) Protons", "B) Neutrons", "C) Electrons", "D) Atoms"],
+                correct: 2
+            },
+            {
+                question: "The resistance of a wire depends on:",
+                options: ["A) Length", "B) Cross-sectional area", "C) Material", "D) All of the above"],
+                correct: 3
+            },
+
+            // Nuclear Physics
+            {
+                question: "The nucleus of an atom contains:",
+                options: ["A) Protons only", "B) Neutrons only", "C) Protons and neutrons", "D) Protons, neutrons, and electrons"],
+                correct: 2
+            },
+            {
+                question: "The atomic number represents the number of:",
+                options: ["A) Neutrons", "B) Protons", "C) Electrons", "D) Nucleons"],
+                correct: 1
+            },
+            {
+                question: "Isotopes have the same number of:",
+                options: ["A) Neutrons", "B) Protons", "C) Mass number", "D) Electrons in neutral atom"],
+                correct: 1
+            },
+            {
+                question: "Alpha particles are:",
+                options: ["A) Electrons", "B) Protons", "C) Helium nuclei", "D) Neutrons"],
+                correct: 2
+            },
+            {
+                question: "Beta particles are:",
+                options: ["A) Protons", "B) Neutrons", "C) Electrons or positrons", "D) Alpha particles"],
+                correct: 2
+            },
+            {
+                question: "Gamma rays are:",
+                options: ["A) Particles", "B) Electromagnetic radiation", "C) Sound waves", "D) Matter waves"],
+                correct: 1
+            },
+            {
+                question: "The half-life of a radioactive element is the time required for:",
+                options: ["A) Complete decay", "B) Half the nuclei to decay", "C) Quarter decay", "D) No decay"],
+                correct: 1
+            },
+            {
+                question: "Nuclear fission is:",
+                options: ["A) Splitting of heavy nuclei", "B) Fusion of light nuclei", "C) Radioactive decay", "D) Nuclear reaction"],
+                correct: 0
+            },
+            {
+                question: "Nuclear fusion is:",
+                options: ["A) Splitting of heavy nuclei", "B) Combining of light nuclei", "C) Radioactive decay", "D) Electron capture"],
+                correct: 1
+            },
+            {
+                question: "The binding energy is:",
+                options: ["A) Energy to remove an electron", "B) Energy to break up nucleus", "C) Kinetic energy of nucleus", "D) Potential energy of nucleus"],
+                correct: 1
+            },
+            {
+                question: "Mass defect is:",
+                options: ["A) Loss of mass in nuclear reaction", "B) Difference between atomic mass and mass number", "C) Mass of products minus reactants", "D) All of the above"],
+                correct: 1
+            },
+            {
+                question: "Einstein's mass-energy relation is:",
+                options: ["A) E = mc", "B) E = mc²", "C) E = m²c", "D) E = m/c²"],
+                correct: 1
+            },
+            {
+                question: "Carbon-14 dating is used to determine:",
+                options: ["A) Age of rocks", "B) Age of organic materials", "C) Nuclear mass", "D) Atomic number"],
+                correct: 1
+            },
+            {
+                question: "Nuclear reactors use:",
+                options: ["A) Nuclear fusion", "B) Nuclear fission", "C) Radioactive decay", "D) Chemical reactions"],
+                correct: 1
+            },
+            {
+                question: "The most penetrating radiation is:",
+                options: ["A) Alpha", "B) Beta", "C) Gamma", "D) X-rays"],
+                correct: 2
+            }
+        ];
+
+        // Shuffle function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startExam() {
+            // Shuffle questions when exam starts
+            shuffledQuestions = shuffleArray(originalQuestions);
+            
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('examInterface').style.display = 'block';
+            examStarted = true;
+            
+            // Initialize navigation grid
+            initializeNavigation();
+            
+            // Start timer
+            startTimer();
+            
+            // Load first question
+            loadQuestion(0);
+        }
+
+        function initializeNavigation() {
+            const navGrid = document.getElementById('navGrid');
+            navGrid.innerHTML = '';
+            
+            for (let i = 0; i < 100; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'nav-btn unanswered';
+                btn.textContent = i + 1;
+                btn.onclick = () => goToQuestion(i);
+                navGrid.appendChild(btn);
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+            
+            document.getElementById('timer').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestion = index;
+            const question = shuffledQuestions[index];
+            
+            document.getElementById('questionNumber').textContent = `Question ${index + 1}`;
+            document.getElementById('questionText').innerHTML = question.question;
+            document.getElementById('currentQ').textContent = index + 1;
+            
+            // Load options
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, i) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                
+                // Check if we're in review mode (results have been calculated)
+                const inReviewMode = document.getElementById('results').style.display === 'none' && 
+                                    document.getElementById('examInterface').style.display === 'block' && 
+                                    Object.keys(answers).length > 0 && 
+                                    document.getElementById('scoreDisplay').textContent !== '';
+                
+                if (inReviewMode) {
+                    // In review mode, show correct and incorrect answers
+                    if (i === question.correct) {
+                        optionDiv.classList.add('correct-answer');
+                    }
+                    if (answers[index] === i && i !== question.correct) {
+                        optionDiv.classList.add('wrong-answer');
+                    }
+                    if (answers[index] === i) {
+                        optionDiv.classList.add('selected');
+                    }
+                } else {
+                    // Normal exam mode
+                    if (answers[index] === i) {
+                        optionDiv.classList.add('selected');
+                    }
+                }
+                
+                optionDiv.innerHTML = `
+                    <input type="radio" name="question${index}" value="${i}" ${answers[index] === i ? 'checked' : ''} ${inReviewMode ? 'disabled' : ''}>
+                    ${option}
+                `;
+                
+                if (!inReviewMode) {
+                    optionDiv.onclick = () => selectAnswer(index, i);
+                }
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Update navigation
+            updateNavigation();
+            
+            // Update flag button
+            const flagBtn = document.getElementById('flagBtn');
+            flagBtn.textContent = flaggedQuestions.has(index) ? '🚩 Unflag' : '🚩 Flag';
+            
+            // Update prev/next buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === 99;
+        }
+
+        function selectAnswer(questionIndex, answerIndex) {
+            answers[questionIndex] = answerIndex;
+            
+            // Update option display
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                option.classList.toggle('selected', i === answerIndex);
+                const radio = option.querySelector('input[type="radio"]');
+                radio.checked = i === answerIndex;
+            });
+            
+            updateNavigation();
+            updateAnsweredCount();
+        }
+
+        function updateNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach((btn, i) => {
+                btn.className = 'nav-btn';
+                
+                if (i === currentQuestion) {
+                    btn.classList.add('current');
+                } else if (flaggedQuestions.has(i)) {
+                    btn.classList.add('flagged');
+                } else if (answers.hasOwnProperty(i)) {
+                    btn.classList.add('answered');
+                } else {
+                    btn.classList.add('unanswered');
+                }
+            });
+        }
+
+        function updateAnsweredCount() {
+            const answeredCount = Object.keys(answers).length;
+            document.getElementById('answered').textContent = `${answeredCount} / 100`;
+        }
+
+        function toggleFlag() {
+            if (flaggedQuestions.has(currentQuestion)) {
+                flaggedQuestions.delete(currentQuestion);
+            } else {
+                flaggedQuestions.add(currentQuestion);
+            }
+            
+            document.getElementById('flagged').textContent = flaggedQuestions.size;
+            document.getElementById('flagBtn').textContent = 
+                flaggedQuestions.has(currentQuestion) ? '🚩 Unflag' : '🚩 Flag';
+            
+            updateNavigation();
+        }
+
+        function goToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                loadQuestion(currentQuestion - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < 99) {
+                loadQuestion(currentQuestion + 1);
+            }
+        }
+
+        function submitExam() {
+            if (confirm('Are you sure you want to submit your exam? This action cannot be undone.')) {
+                clearInterval(timerInterval);
+                calculateResults();
+            }
+        }
+
+        function calculateResults() {
+            let correctAnswers = 0;
+            
+            for (let i = 0; i < shuffledQuestions.length; i++) {
+                if (answers[i] === shuffledQuestions[i].correct) {
+                    correctAnswers++;
+                }
+            }
+            
+            const percentage = (correctAnswers / shuffledQuestions.length) * 100;
+            let grade;
+            
+            if (percentage >= 90) grade = 'A (Excellent)';
+            else if (percentage >= 80) grade = 'B (Very Good)';
+            else if (percentage >= 70) grade = 'C (Good)';
+            else if (percentage >= 60) grade = 'D (Satisfactory)';
+            else grade = 'F (Fail)';
+            
+            document.getElementById('examInterface').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('scoreDisplay').textContent = `${correctAnswers}/100 (${percentage.toFixed(1)}%)`;
+            document.getElementById('gradeDisplay').textContent = `Grade: ${grade}`;
+        }
+
+        function reviewAnswers() {
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('examInterface').style.display = 'block';
+            
+            // Disable submit button and navigation in review mode
+            document.querySelector('.btn-success').style.display = 'none';
+            
+            // Add a "Back to Results" button
+            const backBtn = document.createElement('button');
+            backBtn.className = 'btn btn-secondary';
+            backBtn.textContent = 'Back to Results';
+            backBtn.onclick = () => {
+                document.getElementById('examInterface').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                document.querySelector('.btn-success').style.display = 'inline-block';
+                backBtn.remove();
+            };
+            document.querySelector('.controls').appendChild(backBtn);
+            
+            loadQuestion(0);
+        }
+
+        function restartExam() {
+            currentQuestion = 0;
+            answers = {};
+            flaggedQuestions.clear();
+            timeRemaining = 180 * 60;
+            shuffledQuestions = [];
+            
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+        }
+
+        // Initialize timer display
+        updateTimerDisplay();
+    </script>
+</body>
+</html>

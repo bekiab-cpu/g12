@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopian Grade 11 Mathematics Practice Exam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 60px; /* Space for footer */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .exam-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-item h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .exam-content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .question-nav {
+            width: 250px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-right: 2px solid #e9ecef;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.unanswered {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+
+        .nav-btn.answered {
+            background: #28a745;
+            color: white;
+        }
+
+        .nav-btn.current {
+            background: #007bff;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .nav-btn.flagged {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .question-area {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .question-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .flag-btn {
+            background: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        .math-expression {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            text-align: center;
+            border-left: 4px solid #007bff;
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #007bff;
+            color: white;
+        }
+
+        .option.correct-answer {
+            background: #d4edda !important;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .option.wrong-answer {
+            background: #f8d7da !important;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .option.correct-answer:hover {
+            background: #d4edda !important;
+            transform: none;
+        }
+
+        .option.wrong-answer:hover {
+            background: #f8d7da !important;
+            transform: none;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .results {
+            display: none;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 3em;
+            font-weight: bold;
+            color: #28a745;
+            margin: 20px 0;
+        }
+
+        .grade {
+            font-size: 2em;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .start-screen {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .start-btn {
+            background: #28a745;
+            color: white;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin: 8px 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .exam-content {
+                flex-direction: column;
+            }
+            
+            .question-nav {
+                width: 100%;
+                order: 2;
+            }
+            
+            .nav-grid {
+                grid-template-columns: repeat(10, 1fr);
+            }
+
+            body {
+                padding-bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇪🇹 Ethiopian Grade 11 Mathematics</h1>
+            <p>Practice Examination</p>
+        </div>
+
+        <div id="startScreen" class="start-screen">
+            <h2>Welcome to the Grade 11 Mathematics Practice Exam</h2>
+
+            <div class="instructions">
+                <h3>Instructions:</h3>
+                <ul>
+                    <li>This exam contains 100 multiple-choice questions</li>
+                    <li>Time limit: 3 hours (180 minutes)</li>
+                    <li>Each question has 4 options (A, B, C, D)</li>
+                    <li>Questions cover all major topics from the Grade 11 curriculum</li>
+                    <li>You can navigate between questions using the question grid</li>
+                    <li>Flag questions for review if needed</li>
+                    <li>Your answers are automatically saved</li>
+                    <li>Click "Submit Exam" when you're finished</li>
+                </ul>
+            </div>
+            <button class="start-btn" onclick="startExam()">Start Exam</button>
+        </div>
+
+        <div id="examInterface" style="display: none;">
+            <div class="exam-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>Time Remaining</h3>
+                        <div id="timer" class="timer">03:00:00</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Questions Answered</h3>
+                        <div id="answered">0 / 100</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Current Question</h3>
+                        <div id="currentQ">1</div>
+                    </div>
+                    <div class="info-item">
+                        <h3>Flagged Questions</h3>
+                        <div id="flagged">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exam-content">
+                <div class="question-nav">
+                    <h3>Question Navigation</h3>
+                    <div id="navGrid" class="nav-grid"></div>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn unanswered" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Unanswered</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn answered" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Answered</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 5px 0;">
+                            <div class="nav-btn flagged" style="width: 20px; height: 20px; margin-right: 10px;"></div>
+                            <span>Flagged</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-area">
+                    <div class="question-header">
+                        <div class="question-number" id="questionNumber">Question 1</div>
+                        <button class="flag-btn" id="flagBtn" onclick="toggleFlag()">🚩 Flag</button>
+                    </div>
+
+                    <div class="question-text" id="questionText"></div>
+
+                    <div class="options" id="options"></div>
+
+                    <div class="controls">
+                        <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+                        <button class="btn btn-success" onclick="submitExam()">Submit Exam</button>
+                        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="results" class="results">
+            <h2>Exam Results</h2>
+            <div class="score-display" id="scoreDisplay"></div>
+            <div class="grade" id="gradeDisplay"></div>
+            <button class="btn btn-primary" onclick="reviewAnswers()">Review Answers</button>
+            <button class="btn btn-secondary" onclick="restartExam()">Take Again</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        Prepared by Biruk
+    </div>
+
+    <script>
+        // Exam data and state
+        let currentQuestion = 0;
+        let answers = {};
+        let flaggedQuestions = new Set();
+        let timeRemaining = 180 * 60; // 3 hours in seconds
+        let timerInterval;
+        let examStarted = false;
+        let shuffledQuestions = [];
+
+        // Original questions array
+        const originalQuestions = [
+            // Relations and Functions
+            {
+                question: "If f(x) = 2x + 3, what is f(5)?",
+                options: ["A) 10", "B) 13", "C) 15", "D) 8"],
+                correct: 1
+            },
+            {
+                question: "Which of the following represents a function?",
+                options: ["A) {(1,2), (1,3), (2,4)}", "B) {(1,2), (2,3), (3,4)}", "C) {(1,2), (2,2), (1,4)}", "D) {(1,2), (1,3), (3,4)}"],
+                correct: 1
+            },
+            {
+                question: "The domain of f(x) = √(x - 2) is:",
+                options: ["A) x ≥ 2", "B) x > 2", "C) x ≤ 2", "D) All real numbers"],
+                correct: 0
+            },
+            {
+                question: "If f(x) = x² - 1 and g(x) = x + 1, find (f ∘ g)(2):",
+                options: ["A) 8", "B) 9", "C) 10", "D) 11"],
+                correct: 0
+            },
+            {
+                question: "The inverse of f(x) = 3x - 2 is:",
+                options: ["A) f⁻¹(x) = (x + 2)/3", "B) f⁻¹(x) = (x - 2)/3", "C) f⁻¹(x) = 3x + 2", "D) f⁻¹(x) = (2 - x)/3"],
+                correct: 0
+            },
+            {
+                question: "The range of f(x) = x² + 1 is:",
+                options: ["A) y ≥ 0", "B) y ≥ 1", "C) y > 1", "D) All real numbers"],
+                correct: 1
+            },
+            {
+                question: "If f(x) = |x - 3|, find f(-2):",
+                options: ["A) 1", "B) 5", "C) -5", "D) -1"],
+                correct: 1
+            },
+            {
+                question: "Which function is even?",
+                options: ["A) f(x) = x³", "B) f(x) = x² + 1", "C) f(x) = x + 1", "D) f(x) = x³ + x"],
+                correct: 1
+            },
+            {
+                question: "The composition (g ∘ f)(x) where f(x) = x + 1 and g(x) = x² is:",
+                options: ["A) x² + 1", "B) (x + 1)²", "C) x² + 2x + 1", "D) Both B and C"],
+                correct: 3
+            },
+            {
+                question: "If f(x) = 2x - 1, what is f⁻¹(5)?",
+                options: ["A) 2", "B) 3", "C) 4", "D) 9"],
+                correct: 1
+            },
+            {
+                question: "The domain of f(x) = 1/(x - 3) is:",
+                options: ["A) x ≠ 3", "B) x > 3", "C) x < 3", "D) All real numbers"],
+                correct: 0
+            },
+            {
+                question: "Which relation is NOT a function?",
+                options: ["A) y = x²", "B) x = y²", "C) y = 2x + 1", "D) y = |x|"],
+                correct: 1
+            },
+            {
+                question: "If f(x) = x³ - 2x, find f(-1):",
+                options: ["A) 1", "B) -1", "C) 3", "D) -3"],
+                correct: 0
+            },
+            {
+                question: "The function f(x) = x² - 4x + 3 has vertex at:",
+                options: ["A) (2, -1)", "B) (2, 1)", "C) (-2, -1)", "D) (-2, 1)"],
+                correct: 0
+            },
+            {
+                question: "If f(x) = √x and g(x) = x - 1, the domain of (f ∘ g)(x) is:",
+                options: ["A) x ≥ 0", "B) x ≥ 1", "C) x > 1", "D) All real numbers"],
+                correct: 1
+            },
+
+            // Rational Expressions and Rational Functions
+            {
+                question: "Simplify: (x² - 4)/(x - 2)",
+                options: ["A) x + 2", "B) x - 2", "C) x² + 2", "D) Cannot be simplified"],
+                correct: 0
+            },
+            {
+                question: "The domain of f(x) = (x + 1)/(x² - 9) excludes:",
+                options: ["A) x = 3 only", "B) x = -3 only", "C) x = ±3", "D) x = -1"],
+                correct: 2
+            },
+            {
+                question: "Simplify: (2x + 4)/(x + 2)",
+                options: ["A) 2", "B) 2x", "C) x + 2", "D) 2(x + 2)"],
+                correct: 0
+            },
+            {
+                question: "Add: 1/x + 2/x",
+                options: ["A) 3/x", "B) 3/2x", "C) 2/x", "D) 1/2x"],
+                correct: 0
+            },
+            {
+                question: "Multiply: (x + 1)/x · x/(x + 1)",
+                options: ["A) 1", "B) x", "C) (x + 1)/x", "D) x/(x + 1)"],
+                correct: 0
+            },
+            {
+                question: "The vertical asymptote of f(x) = 1/(x - 5) is:",
+                options: ["A) x = 0", "B) x = 5", "C) x = -5", "D) y = 0"],
+                correct: 1
+            },
+            {
+                question: "Solve: 1/x = 3/6",
+                options: ["A) x = 2", "B) x = 3", "C) x = 6", "D) x = 1/2"],
+                correct: 0
+            },
+            {
+                question: "The horizontal asymptote of f(x) = (2x + 1)/(x - 3) is:",
+                options: ["A) y = 0", "B) y = 2", "C) y = 1", "D) y = -3"],
+                correct: 1
+            },
+            {
+                question: "Simplify: (x² - 1)/(x² + x)",
+                options: ["A) (x - 1)/x", "B) (x + 1)/x", "C) x - 1", "D) x + 1"],
+                correct: 0
+            },
+            {
+                question: "Divide: (x + 2)/3 ÷ (x + 2)/6",
+                options: ["A) 1/2", "B) 2", "C) (x + 2)/2", "D) 2(x + 2)"],
+                correct: 1
+            },
+            {
+                question: "The LCD of 1/(x-1) and 1/(x+1) is:",
+                options: ["A) x² - 1", "B) (x - 1)(x + 1)", "C) x - 1", "D) Both A and B"],
+                correct: 3
+            },
+            {
+                question: "Solve: x/(x-2) = 3",
+                options: ["A) x = 3", "B) x = 6", "C) x = 2", "D) No solution"],
+                correct: 0
+            },
+            {
+                question: "The graph of f(x) = 1/x² has:",
+                options: ["A) One vertical asymptote", "B) Two vertical asymptotes", "C) No vertical asymptotes", "D) One horizontal asymptote"],
+                correct: 0
+            },
+            {
+                question: "Simplify: (a² - b²)/(a + b)",
+                options: ["A) a - b", "B) a + b", "C) a² - b²", "D) Cannot be simplified"],
+                correct: 0
+            },
+            {
+                question: "The range of f(x) = 1/x is:",
+                options: ["A) All real numbers", "B) y ≠ 0", "C) y > 0", "D) y < 0"],
+                correct: 1
+            },
+
+            // Matrices
+            {
+                question: "What is the order of matrix A = [[1, 2, 3], [4, 5, 6]]?",
+                options: ["A) 2 × 3", "B) 3 × 2", "C) 2 × 2", "D) 3 × 3"],
+                correct: 0
+            },
+            {
+                question: "If A = [[2, 1], [3, 4]] and B = [[1, 0], [2, 1]], find A + B:",
+                options: ["A) [[3, 1], [5, 5]]", "B) [[1, 1], [1, 3]]", "C) [[2, 0], [6, 4]]", "D) [[3, 0], [5, 4]]"],
+                correct: 0
+            },
+            {
+                question: "The additive identity matrix for 2×2 matrices is:",
+                options: ["A) [[1, 0], [0, 1]]", "B) [[0, 0], [0, 0]]", "C) [[1, 1], [1, 1]]", "D) [[-1, 0], [0, -1]]"],
+                correct: 1
+            },
+            {
+                question: "If A = [[2, 3], [1, 4]], find 2A:",
+                options: ["A) [[4, 6], [2, 8]]", "B) [[2, 3], [1, 4]]", "C) [[4, 5], [3, 6]]", "D) [[0, 1], [-1, 2]]"],
+                correct: 0
+            },
+            {
+                question: "For matrix multiplication AB to be defined, if A is m×n, then B must be:",
+                options: ["A) m × n", "B) n × p (any p)", "C) p × m (any p)", "D) n × m"],
+                correct: 1
+            },
+            {
+                question: "The transpose of A = [[1, 2], [3, 4], [5, 6]] is:",
+                options: ["A) [[1, 3, 5], [2, 4, 6]]", "B) [[1, 2], [3, 4], [5, 6]]", "C) [[6, 5], [4, 3], [2, 1]]", "D) [[1, 3], [2, 4], [5, 6]]"],
+                correct: 0
+            },
+            {
+                question: "If A = [[1, 2], [3, 4]] and B = [[2, 0], [1, 3]], find AB:",
+                options: ["A) [[4, 6], [10, 12]]", "B) [[4, 6], [11, 12]]", "C) [[2, 0], [3, 12]]", "D) [[3, 2], [4, 7]]"],
+                correct: 0
+            },
+            {
+                question: "A square matrix A is symmetric if:",
+                options: ["A) A = -A^T", "B) A = A^T", "C) A = A^(-1)", "D) A = 0"],
+                correct: 1
+            },
+            {
+                question: "The multiplicative identity for 2×2 matrices is:",
+                options: ["A) [[0, 0], [0, 0]]", "B) [[1, 1], [1, 1]]", "C) [[1, 0], [0, 1]]", "D) [[2, 0], [0, 2]]"],
+                correct: 2
+            },
+            {
+                question: "If A = [[a, b], [c, d]], then -A equals:",
+                options: ["A) [[-a, -b], [-c, -d]]", "B) [[d, -b], [-c, a]]", "C) [[a, -b], [-c, d]]", "D) [[-a, b], [c, -d]]"],
+                correct: 0
+            },
+            {
+                question: "Two matrices can be added if and only if they have:",
+                options: ["A) The same number of rows", "B) The same number of columns", "C) The same order", "D) The same determinant"],
+                correct: 2
+            },
+            {
+                question: "If A is a 3×4 matrix and B is a 4×2 matrix, then AB is:",
+                options: ["A) 3×2 matrix", "B) 4×4 matrix", "C) 3×4 matrix", "D) Undefined"],
+                correct: 0
+            },
+
+            // Determinants and their Properties
+            {
+                question: "The determinant of [[2, 3], [1, 4]] is:",
+                options: ["A) 5", "B) 8", "C) 11", "D) 2"],
+                correct: 0
+            },
+            {
+                question: "If det(A) = 0, then matrix A is:",
+                options: ["A) Invertible", "B) Singular", "C) Identity", "D) Symmetric"],
+                correct: 1
+            },
+            {
+                question: "The determinant of [[1, 0], [0, 1]] is:",
+                options: ["A) 0", "B) 1", "C) 2", "D) -1"],
+                correct: 1
+            },
+            {
+                question: "If A is a 2×2 matrix and det(A) = 3, then det(2A) equals:",
+                options: ["A) 3", "B) 6", "C) 12", "D) 9"],
+                correct: 2
+            },
+            {
+                question: "The determinant of [[a, b], [c, d]] is:",
+                options: ["A) ac - bd", "B) ad - bc", "C) ab - cd", "D) a + d - b - c"],
+                correct: 1
+            },
+            {
+                question: "If two rows of a matrix are identical, its determinant is:",
+                options: ["A) 1", "B) -1", "C) 0", "D) 2"],
+                correct: 2
+            },
+            {
+                question: "The determinant of [[3, 0], [0, 4]] is:",
+                options: ["A) 7", "B) 12", "C) 0", "D) 1"],
+                correct: 1
+            },
+            {
+                question: "If det(A) = 5, then det(A^T) equals:",
+                options: ["A) 5", "B) -5", "C) 1/5", "D) 25"],
+                correct: 0
+            },
+            {
+                question: "The cofactor of element a₁₁ in [[a₁₁, a₁₂], [a₂₁, a₂₂]] is:",
+                options: ["A) a₂₂", "B) -a₂₂", "C) a₁₂", "D) -a₁₂"],
+                correct: 0
+            },
+            {
+                question: "If A and B are 2×2 matrices, then det(AB) equals:",
+                options: ["A) det(A) + det(B)", "B) det(A) × det(B)", "C) det(A) - det(B)", "D) det(A)/det(B)"],
+                correct: 1
+            },
+            {
+                question: "The determinant of [[1, 2], [3, 6]] is:",
+                options: ["A) 0", "B) 6", "C) 12", "D) -6"],
+                correct: 0
+            },
+            {
+                question: "If det(A) = -2, then det(-A) equals:",
+                options: ["A) -2", "B) 2", "C) 4", "D) -4"],
+                correct: 1
+            },
+
+            // Vectors
+            {
+                question: "The magnitude of vector v = (3, 4) is:",
+                options: ["A) 7", "B) 5", "C) 12", "D) 25"],
+                correct: 1
+            },
+            {
+                question: "If u = (2, 1) and v = (1, 3), then u + v equals:",
+                options: ["A) (3, 4)", "B) (1, 2)", "C) (2, 3)", "D) (3, 1)"],
+                correct: 0
+            },
+            {
+                question: "The unit vector in the direction of v = (6, 8) is:",
+                options: ["A) (3/5, 4/5)", "B) (6/10, 8/10)", "C) (0.6, 0.8)", "D) Both A and C"],
+                correct: 3
+            },
+            {
+                question: "If v = (2, -3), then -2v equals:",
+                options: ["A) (-4, 6)", "B) (4, -6)", "C) (-2, 3)", "D) (2, 3)"],
+                correct: 0
+            },
+            {
+                question: "The dot product of u = (1, 2) and v = (3, 4) is:",
+                options: ["A) 7", "B) 11", "C) (3, 8)", "D) 5"],
+                correct: 1
+            },
+            {
+                question: "Two vectors are perpendicular if their dot product is:",
+                options: ["A) 1", "B) -1", "C) 0", "D) Maximum"],
+                correct: 2
+            },
+            {
+                question: "The zero vector is:",
+                options: ["A) (1, 0)", "B) (0, 1)", "C) (0, 0)", "D) (1, 1)"],
+                correct: 2
+            },
+            {
+                question: "If u = (2, 1) and v = (1, -2), then u · v equals:",
+                options: ["A) 0", "B) 4", "C) -4", "D) 2"],
+                correct: 0
+            },
+            {
+                question: "The angle between vectors u = (1, 0) and v = (0, 1) is:",
+                options: ["A) 0°", "B) 45°", "C) 90°", "D) 180°"],
+                correct: 2
+            },
+            {
+                question: "If ||v|| = 5 and v = (3, y), then y equals:",
+                options: ["A) ±4", "B) ±3", "C) ±5", "D) ±2"],
+                correct: 0
+            },
+            {
+                question: "The vector from point A(1, 2) to point B(4, 6) is:",
+                options: ["A) (3, 4)", "B) (5, 8)", "C) (-3, -4)", "D) (4, 6)"],
+                correct: 0
+            },
+            {
+                question: "If u = (a, b), then the vector -u is:",
+                options: ["A) (a, -b)", "B) (-a, b)", "C) (-a, -b)", "D) (b, a)"],
+                correct: 2
+            },
+            {
+                question: "The projection of vector u onto vector v is given by:",
+                options: ["A) (u·v/||v||²)v", "B) (u·v)v", "C) u·v/||v||", "D) ||u||cos θ"],
+                correct: 0
+            },
+            {
+                question: "If vectors u and v are parallel, then:",
+                options: ["A) u·v = 0", "B) u = kv for some scalar k", "C) ||u|| = ||v||", "D) u + v = 0"],
+                correct: 1
+            },
+            {
+                question: "The distance between points P(1, 2) and Q(4, 6) is:",
+                options: ["A) 3", "B) 4", "C) 5", "D) 7"],
+                correct: 2
+            },
+
+            // Transformations of the Plane
+            {
+                question: "A translation by vector (2, 3) moves point (1, 1) to:",
+                options: ["A) (3, 4)", "B) (2, 3)", "C) (-1, -2)", "D) (1, 1)"],
+                correct: 0
+            },
+            {
+                question: "A reflection across the x-axis maps point (2, 3) to:",
+                options: ["A) (-2, 3)", "B) (2, -3)", "C) (-2, -3)", "D) (3, 2)"],
+                correct: 1
+            },
+            {
+                question: "A rotation of 90° counterclockwise about the origin maps (1, 0) to:",
+                options: ["A) (0, 1)", "B) (-1, 0)", "C) (0, -1)", "D) (1, 0)"],
+                correct: 0
+            },
+            {
+                question: "The matrix for reflection across the y-axis is:",
+                options: ["A) [[-1, 0], [0, 1]]", "B) [[1, 0], [0, -1]]", "C) [[-1, 0], [0, -1]]", "D) [[0, 1], [1, 0]]"],
+                correct: 0
+            },
+            {
+                question: "A scaling transformation with factor 2 maps (1, 1) to:",
+                options: ["A) (2, 2)", "B) (1, 2)", "C) (2, 1)", "D) (3, 3)"],
+                correct: 0
+            },
+            {
+                question: "The composition of two reflections across parallel lines is:",
+                options: ["A) A reflection", "B) A rotation", "C) A translation", "D) The identity"],
+                correct: 2
+            },
+            {
+                question: "A rotation of 180° about the origin maps (x, y) to:",
+                options: ["A) (-x, -y)", "B) (y, -x)", "C) (-y, x)", "D) (x, -y)"],
+                correct: 0
+            },
+            {
+                question: "The transformation matrix [[2, 0], [0, 3]] represents:",
+                options: ["A) Rotation", "B) Reflection", "C) Scaling", "D) Translation"],
+                correct: 2
+            },
+            {
+                question: "A reflection across the line y = x maps (a, b) to:",
+                options: ["A) (b, a)", "B) (-a, -b)", "C) (a, -b)", "D) (-a, b)"],
+                correct: 0
+            },
+            {
+                question: "The inverse of a rotation by angle θ is:",
+                options: ["A) Rotation by -θ", "B) Rotation by θ", "C) Reflection", "D) Translation"],
+                correct: 0
+            },
+            {
+                question: "Which transformation preserves distances?",
+                options: ["A) Scaling", "B) Shearing", "C) Rotation", "D) All of the above"],
+                correct: 2
+            },
+            {
+                question: "The matrix for rotation by 90° counterclockwise is:",
+                options: ["A) [[0, -1], [1, 0]]", "B) [[0, 1], [-1, 0]]", "C) [[1, 0], [0, -1]]", "D) [[-1, 0], [0, 1]]"],
+                correct: 0
+            },
+
+            // Statistics
+            {
+                question: "The mean of the data set {2, 4, 6, 8, 10} is:",
+                options: ["A) 5", "B) 6", "C) 7", "D) 8"],
+                correct: 1
+            },
+            {
+                question: "The median of {1, 3, 5, 7, 9, 11} is:",
+                options: ["A) 5", "B) 6", "C) 7", "D) 8"],
+                correct: 1
+            },
+            {
+                question: "The mode of {2, 3, 3, 4, 5, 5, 5, 6} is:",
+                options: ["A) 3", "B) 4", "C) 5", "D) 6"],
+                correct: 2
+            },
+            {
+                question: "The range of {10, 15, 20, 25, 30} is:",
+                options: ["A) 15", "B) 20", "C) 25", "D) 30"],
+                correct: 1
+            },
+            {
+                question: "If the mean of 5 numbers is 12, their sum is:",
+                options: ["A) 48", "B) 60", "C) 72", "D) 84"],
+                correct: 1
+            },
+            {
+                question: "The variance measures:",
+                options: ["A) Central tendency", "B) Spread of data", "C) Skewness", "D) Correlation"],
+                correct: 1
+            },
+            {
+                question: "In a normal distribution, approximately what percentage of data falls within one standard deviation of the mean?",
+                options: ["A) 50%", "B) 68%", "C) 95%", "D) 99%"],
+                correct: 1
+            },
+            {
+                question: "The standard deviation is the:",
+                options: ["A) Square of variance", "B) Square root of variance", "C) Mean of deviations", "D) Range divided by 4"],
+                correct: 1
+            },
+            {
+                question: "A histogram displays:",
+                options: ["A) Correlation", "B) Frequency distribution", "C) Time series", "D) Probability"],
+                correct: 1
+            },
+            {
+                question: "The first quartile (Q1) is the:",
+                options: ["A) 25th percentile", "B) 50th percentile", "C) 75th percentile", "D) 100th percentile"],
+                correct: 0
+            },
+
+            // Probability
+            {
+                question: "The probability of getting heads when flipping a fair coin is:",
+                options: ["A) 0", "B) 0.5", "C) 1", "D) 2"],
+                correct: 1
+            },
+            {
+                question: "If P(A) = 0.3 and P(B) = 0.4, and A and B are mutually exclusive, then P(A ∪ B) is:",
+                options: ["A) 0.12", "B) 0.7", "C) 0.1", "D) 1"],
+                correct: 1
+            },
+            {
+                question: "The probability of rolling a 6 on a fair die is:",
+                options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 5/6"],
+                correct: 0
+            },
+            {
+                question: "If events A and B are independent, then P(A ∩ B) equals:",
+                options: ["A) P(A) + P(B)", "B) P(A) × P(B)", "C) P(A) - P(B)", "D) P(A)/P(B)"],
+                correct: 1
+            },
+            {
+                question: "The complement of event A has probability:",
+                options: ["A) P(A)", "B) 1 - P(A)", "C) 1 + P(A)", "D) P(A) - 1"],
+                correct: 1
+            },
+            {
+                question: "In a deck of 52 cards, the probability of drawing a heart is:",
+                options: ["A) 1/13", "B) 1/4", "C) 1/2", "D) 4/13"],
+                correct: 1
+            },
+            {
+                question: "If P(A) = 0.6 and P(B|A) = 0.8, then P(A ∩ B) is:",
+                options: ["A) 0.48", "B) 1.4", "C) 0.2", "D) 0.75"],
+                correct: 0
+            },
+            {
+                question: "The sum of all probabilities in a probability distribution equals:",
+                options: ["A) 0", "B) 0.5", "C) 1", "D) Varies"],
+                correct: 2
+            },
+            {
+                question: "If you roll two dice, the probability of getting a sum of 7 is:",
+                options: ["A) 1/6", "B) 1/12", "C) 1/36", "D) 7/36"],
+                correct: 0
+            }
+        ];
+
+        // Shuffle function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startExam() {
+            // Shuffle questions when exam starts
+            shuffledQuestions = shuffleArray(originalQuestions);
+            
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('examInterface').style.display = 'block';
+            examStarted = true;
+            
+            // Initialize navigation grid
+            initializeNavigation();
+            
+            // Start timer
+            startTimer();
+            
+            // Load first question
+            loadQuestion(0);
+        }
+
+        function initializeNavigation() {
+            const navGrid = document.getElementById('navGrid');
+            navGrid.innerHTML = '';
+            
+            for (let i = 0; i < 100; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'nav-btn unanswered';
+                btn.textContent = i + 1;
+                btn.onclick = () => goToQuestion(i);
+                navGrid.appendChild(btn);
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+            
+            document.getElementById('timer').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function loadQuestion(index) {
+            currentQuestion = index;
+            const question = shuffledQuestions[index];
+            
+            document.getElementById('questionNumber').textContent = `Question ${index + 1}`;
+            document.getElementById('questionText').innerHTML = question.question;
+            document.getElementById('currentQ').textContent = index + 1;
+            
+            // Load options
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, i) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                
+                // Check if we're in review mode (results have been calculated)
+                const inReviewMode = document.getElementById('results').style.display === 'none' && 
+                                    document.getElementById('examInterface').style.display === 'block' && 
+                                    Object.keys(answers).length > 0 && 
+                                    document.getElementById('scoreDisplay').textContent !== '';
+                
+                if (inReviewMode) {
+                    // In review mode, show correct and incorrect answers
+                    if (i === question.correct) {
+                        optionDiv.classList.add('correct-answer');
+                    }
+                    if (answers[index] === i && i !== question.correct) {
+                        optionDiv.classList.add('wrong-answer');
+                    }
+                    if (answers[index] === i) {
+                        optionDiv.classList.add('selected');
+                    }
+                } else {
+                    // Normal exam mode
+                    if (answers[index] === i) {
+                        optionDiv.classList.add('selected');
+                    }
+                }
+                
+                optionDiv.innerHTML = `
+                    <input type="radio" name="question${index}" value="${i}" ${answers[index] === i ? 'checked' : ''} ${inReviewMode ? 'disabled' : ''}>
+                    ${option}
+                `;
+                
+                if (!inReviewMode) {
+                    optionDiv.onclick = () => selectAnswer(index, i);
+                }
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Update navigation
+            updateNavigation();
+            
+            // Update flag button
+            const flagBtn = document.getElementById('flagBtn');
+            flagBtn.textContent = flaggedQuestions.has(index) ? '🚩 Unflag' : '🚩 Flag';
+            
+            // Update prev/next buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === 99;
+        }
+
+        function selectAnswer(questionIndex, answerIndex) {
+            answers[questionIndex] = answerIndex;
+            
+            // Update option display
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                option.classList.toggle('selected', i === answerIndex);
+                const radio = option.querySelector('input[type="radio"]');
+                radio.checked = i === answerIndex;
+            });
+            
+            updateNavigation();
+            updateAnsweredCount();
+        }
+
+        function updateNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach((btn, i) => {
+                btn.className = 'nav-btn';
+                
+                if (i === currentQuestion) {
+                    btn.classList.add('current');
+                } else if (flaggedQuestions.has(i)) {
+                    btn.classList.add('flagged');
+                } else if (answers.hasOwnProperty(i)) {
+                    btn.classList.add('answered');
+                } else {
+                    btn.classList.add('unanswered');
+                }
+            });
+        }
+
+        function updateAnsweredCount() {
+            const answeredCount = Object.keys(answers).length;
+            document.getElementById('answered').textContent = `${answeredCount} / 100`;
+        }
+
+        function toggleFlag() {
+            if (flaggedQuestions.has(currentQuestion)) {
+                flaggedQuestions.delete(currentQuestion);
+            } else {
+                flaggedQuestions.add(currentQuestion);
+            }
+            
+            document.getElementById('flagged').textContent = flaggedQuestions.size;
+            document.getElementById('flagBtn').textContent = 
+                flaggedQuestions.has(currentQuestion) ? '🚩 Unflag' : '🚩 Flag';
+            
+            updateNavigation();
+        }
+
+        function goToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                loadQuestion(currentQuestion - 1);
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < 99) {
+                loadQuestion(currentQuestion + 1);
+            }
+        }
+
+        function submitExam() {
+            if (confirm('Are you sure you want to submit your exam? This action cannot be undone.')) {
+                clearInterval(timerInterval);
+                calculateResults();
+            }
+        }
+
+        function calculateResults() {
+            let correctAnswers = 0;
+            
+            for (let i = 0; i < shuffledQuestions.length; i++) {
+                if (answers[i] === shuffledQuestions[i].correct) {
+                    correctAnswers++;
+                }
+            }
+            
+            const percentage = (correctAnswers / shuffledQuestions.length) * 100;
+            let grade;
+            
+            if (percentage >= 90) grade = 'A (Excellent)';
+            else if (percentage >= 80) grade = 'B (Very Good)';
+            else if (percentage >= 70) grade = 'C (Good)';
+            else if (percentage >= 60) grade = 'D (Satisfactory)';
+            else grade = 'F (Fail)';
+            
+            document.getElementById('examInterface').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('scoreDisplay').textContent = `${correctAnswers}/100 (${percentage.toFixed(1)}%)`;
+            document.getElementById('gradeDisplay').textContent = `Grade: ${grade}`;
+        }
+
+        function reviewAnswers() {
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('examInterface').style.display = 'block';
+            
+            // Disable submit button and navigation in review mode
+            document.querySelector('.btn-success').style.display = 'none';
+            
+            // Add a "Back to Results" button
+            const backBtn = document.createElement('button');
+            backBtn.className = 'btn btn-secondary';
+            backBtn.textContent = 'Back to Results';
+            backBtn.onclick = () => {
+                document.getElementById('examInterface').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                document.querySelector('.btn-success').style.display = 'inline-block';
+                backBtn.remove();
+            };
+            document.querySelector('.controls').appendChild(backBtn);
+            
+            loadQuestion(0);
+        }
+
+        function restartExam() {
+            currentQuestion = 0;
+            answers = {};
+            flaggedQuestions.clear();
+            timeRemaining = 180 * 60;
+            shuffledQuestions = [];
+            
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+        }
+
+        // Initialize timer display
+        updateTimerDisplay();
+    </script>
+</body>
+</html>

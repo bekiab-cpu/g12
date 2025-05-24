@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopian Grade 11 Practice Exams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2ecc71 0%, #f1c40f 50%, #e74c3c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .flag {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .exam-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent-color);
+        }
+
+        .exam-card.math {
+            --accent-color: #3498db;
+        }
+
+        .exam-card.chemistry {
+            --accent-color: #e74c3c;
+        }
+
+        .exam-card.physics {
+            --accent-color: #9b59b6;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .exam-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .exam-card h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .exam-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .exam-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .exam-features li {
+            color: #34495e;
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .exam-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .exam-btn {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .exam-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            filter: brightness(110%);
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #2c3e50;
+            display: block;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-section h3 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+        }
+
+        .info-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            color: #34495e;
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 1em;
+            z-index: 1000;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .developer-info {
+            background: rgba(52, 73, 94, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .exam-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .exam-card {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            body {
+                padding-bottom: 100px;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <h1>
+                <span class="flag">🇪🇹</span>
+                Ethiopian Grade 11 Practice Exams
+                <span class="flag">🇪🇹</span>
+            </h1>
+            <p>Comprehensive Practice Tests for Ethiopian Students</p>
+            <div class="subtitle">Master your subjects with authentic exam simulations</div>
+        </div>
+
+        <div class="stats-section fade-in">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">300</span>
+                    <div class="stat-label">Total Questions</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Core Subjects</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Hours Per Exam</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Curriculum Aligned</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="exam-grid">
+            <div class="exam-card math fade-in">
+                <div class="exam-icon">📐</div>
+                <h2>Mathematics</h2>
+                <p>Master algebraic concepts, geometry, trigonometry, and calculus with comprehensive practice
+                    questions.</p>
+                <ul class="exam-features">
+                    <li>Relations and Functions</li>
+                    <li>Rational Expressions</li>
+                    <li>Matrices and Determinants</li>
+                    <li>Vectors and Transformations</li>
+                    <li>Statistics and Probability</li>
+                </ul>
+                <a href="math.html" class="exam-btn">Start Math Exam</a>
+            </div>
+
+            <div class="exam-card chemistry fade-in">
+                <div class="exam-icon">🧪</div>
+                <h2>Chemistry</h2>
+                <p>Explore atomic structure, chemical bonding, states of matter, and organic compounds through detailed
+                    questions.</p>
+                <ul class="exam-features">
+                    <li>Atomic Structure & Periodic Properties</li>
+                    <li>Chemical Bonding</li>
+                    <li>Physical States of Matter</li>
+                    <li>Chemical Kinetics</li>
+                    <li>Organic Compounds</li>
+                </ul>
+                <a href="chemistry.html" class="exam-btn">Start Chemistry Exam</a>
+            </div>
+
+            <div class="exam-card physics fade-in">
+                <div class="exam-icon">⚛️</div>
+                <h2>Physics</h2>
+                <p>Understand mechanics, thermodynamics, electricity, and nuclear physics with practical
+                    problem-solving.</p>
+                <ul class="exam-features">
+                    <li>Vectors and Motion</li>
+                    <li>Dynamics and Forces</li>
+                    <li>Heat and Thermodynamics</li>
+                    <li>Electrostatics & Circuits</li>
+                    <li>Nuclear Physics</li>
+                </ul>
+                <a href="physics.html" class="exam-btn">Start Physics Exam</a>
+            </div>
+        </div>
+
+        <div class="info-section fade-in">
+            <h3>Exam Features</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🎯 Authentic Experience</h4>
+                    <ul>
+                        <li>100 questions per subject</li>
+                        <li>3-hour time limit</li>
+                        <li>Ethiopian curriculum aligned</li>
+                        <li>Randomized question order</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>📊 Smart Features</h4>
+                    <ul>
+                        <li>Real-time progress tracking</li>
+                        <li>Question flagging system</li>
+                        <li>Automatic answer saving</li>
+                        <li>Detailed score analysis</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>📱 User Friendly</h4>
+                    <ul>
+                        <li>Mobile responsive design</li>
+                        <li>Easy navigation</li>
+                        <li>Review mode available</li>
+                        <li>Instant results</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section fade-in">
+            <h3>How to Use</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>1️⃣ Choose Your Subject</h4>
+                    <ul>
+                        <li>Select Mathematics, Chemistry, or Physics</li>
+                        <li>Read the exam instructions carefully</li>
+                        <li>Ensure you have 3 hours available</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>2️⃣ Take the Exam</h4>
+                    <ul>
+                        <li>Answer all 100 questions</li>
+                        <li>Use the navigation grid to move between questions</li>
+                        <li>Flag difficult questions for review</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>3️⃣ Review Results</h4>
+                    <ul>
+                        <li>Get instant scoring and grading</li>
+                        <li>Review correct and incorrect answers</li>
+                        <li>Retake the exam for more practice</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>🎓 Ethiopian Grade 11 Practice Exam Portal</div>
+        <div class="developer-info">Prepared by Biruk</div>
+    </div>
+
+    <script>
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add fade-in animation to elements as they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Add pulse animation to exam cards on hover
+            document.querySelectorAll('.exam-card').forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.querySelector('.exam-icon').classList.add('pulse');
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.querySelector('.exam-icon').classList.remove('pulse');
+                });
+            });
+
+            // Add click tracking for analytics (optional)
+            document.querySelectorAll('.exam-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    const subject = this.closest('.exam-card').querySelector('h2').textContent;
+                    console.log(`Starting ${subject} exam`);
+
+                    // Add loading state
+                    this.style.opacity = '0.7';
+                    this.textContent = 'Loading...';
+                });
+            });
+
+            // Add dynamic stats counter animation
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16);
+
+                function updateCounter() {
+                    start += increment;
+                    if (start < target) {
+                        element.textContent = Math.floor(start);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target;
+                    }
+                }
+                updateCounter();
+            }
+
+            // Animate stat numbers when they come into view
+            const statsObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const number = entry.target;
+                        const target = parseInt(number.textContent);
+                        if (!isNaN(target)) {
+                            number.textContent = '0';
+                            animateCounter(number, target);
+                        }
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.stat-number').forEach(stat => {
+                statsObserver.observe(stat);
+            });
+        });
+    </script>
+</body>
+
+</html>
